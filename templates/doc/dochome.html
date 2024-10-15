@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row">
+          <div class="col-sm-12">
+             <h3 class="page-title">Welcome Doctor {{ user.first_name }} {{ user.last_name }}!</h3>
+             <ul class="breadcrumb">
+                <li class="breadcrumb-item active">Dashboard</li>
+             </ul>
+          </div>
+       </div>
+    </div>
+    <div class="row">
+       <div class="col-xl-4 col-sm-6 col-12 d-flex">
+          <div class="card bg-one w-100">
+             <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                   <div class="db-icon">
+                      <i class="fas fa-file"></i>
+                   </div>
+                   <div class="db-info">
+                      <h3>{{allaptcount}}</h3>
+                      <h6>All Appointment</h6>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="col-xl-4 col-sm-6 col-12 d-flex">
+          <div class="card bg-two w-100">
+             <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                   <div class="db-icon">
+                      <i class="fas fa-file"></i>
+                   </div>
+                   <div class="db-info">
+                      <h3>{{newaptcount}}</h3>
+                      <a href="{% url 'patientnewappointment' %}"><h6>New Appointment</h6></a>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="col-xl-4 col-sm-6 col-12 d-flex">
+          <div class="card bg-four w-100">
+             <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                   <div class="db-icon">
+                      <i class="fas fa-file"></i>
+                   </div>
+                   <div class="db-info">
+                     <h3>{{appaptcount}}</h3>
+                     <a href="{% url 'patientapprovedappointment' %}"><h6>Approved Appointment</h6></a>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="col-xl-4 col-sm-6 col-12 d-flex">
+          <div class="card bg-three w-100">
+             <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                   <div class="db-icon">
+                      <i class="fas fa-file"></i>
+                   </div>
+                   <div class="db-info">
+                     <h3>{{canaptcount}}</h3>
+                     <a href="{% url 'patientcancelledappointment' %}"><h6>Cancelled Appointment</h6></a>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="col-xl-4 col-sm-6 col-12 d-flex">
+         <div class="card bg-four w-100">
+            <div class="card-body">
+               <div class="db-widgets d-flex justify-content-between align-items-center">
+                  <div class="db-icon">
+                     <i class="fas fa-file"></i>
+                  </div>
+                  <div class="db-info">
+                     <h3>{{comaptcount}}</h3>
+                     <a href="{% url 'patientappointmentcompleted' %}"><h6>Completed Appointment</h6></a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+    </div>
+  
+    
+ </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% load static %}
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
+        <a href="{% url 'index' %}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <h1 class="m-0 text-primary"><i></i>HealthyClick</h1>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
+                <a href="{% url 'login' %}" class="nav-item nav-link">Admin</a>
+                <a href="{% url 'login' %}" class="nav-item nav-link">Doctor</a>
+                <a href="{% url 'user_search_appointment' %}" class="nav-item nav-link"> Appointment Status</a>
+            <a href="{% url 'appointment' %}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Appointment<i class="fa fa-arrow-right ms-1"></i></a>
+        </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->

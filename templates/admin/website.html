@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row">
+    <div class="col">
+    <h3 class="page-title">Update Website Details</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'admin_home' %}">Dashboard</a></li>
+    <li class="breadcrumb-item active">Update Website Details</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-lg-12">
+    <div class="card">
+    <div class="card-header">
+    <h5 class="card-title">Update Website Details</h5>
+    </div>
+    <div class="card-body">
+        {% if messages %}
+                        {% for message in messages %}
+                         {% if message.tags == 'error' %}
+                       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                      {{message}}
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                         </button>
+                          </div>
+                       {% endif %}
+                        {% endfor %}
+                       {% endif %}
+                           {% if messages %}
+                        {% for message in messages %}
+                         {% if message.tags == 'success' %}
+                       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                      {{message}}
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                         </button>
+                          </div>
+                       {% endif %}
+                        {% endfor %}
+                       {% endif %}
+                       <form  method="POST" action="{% url 'update_website_details' %}">
+                        {% for i in page %}
+                       
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Page Title</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="pagetitle" value="{{i.pagetitle}}">
+                                <input type="hidden" name="web_id" class="form-control" id="web_id" required="true" value="{{i.id}}">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Address</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="address">{{i.address}}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">About Us</label>
+                            <div class="col-sm-10">
+                                
+                                <textarea class="form-control" name="aboutus">{{i.aboutus}}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" name="email" value="{{i.email}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Mobile Number</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="mobilenumber" value="{{i.mobilenumber}}">
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Update</button>    
+                                </form>
+    </div>
+    </div>
+
+    </div>
+    </div>
+    </div>
+
+
+
+{% endblock %}

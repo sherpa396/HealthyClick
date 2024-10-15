@@ -1,0 +1,131 @@
+{% extends 'userbase.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Search Appointment</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb text-uppercase mb-0">
+                <li class="breadcrumb-item"><a class="text-white" href="{% url 'index' %}">Home</a></li>
+                <li class="breadcrumb-item text-primary active" aria-current="page">Search Appointment</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Page Header End -->
+
+
+
+<!-- Appointment Start -->
+<div class="container-xxl py-12">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card-block">
+                    <h4 class="sub-title">Search Appointment </h4>
+                    <form  method="GET">
+                        
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-form-label">Search(By Fullname/Appointment Number)</label>
+                            <br>
+                            <div class="col-sm-12">
+                                <input type="text" id="query" name="query" class="form-control" style="border: solid #000 1px;" required="">
+
+                            </div>
+                        </div>
+                    <br>
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Search</button>    
+                                </form>
+                            
+                                </div>
+                                <br>
+                                
+            <div class="card card-table">
+        
+            <div class="card-body">
+                {% if messages %}
+                {% for message in messages %}
+                 {% if message.tags == 'error' %}
+               <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{message}}
+             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+                 </button>
+                  </div>
+               {% endif %}
+                {% endfor %}
+               {% endif %}
+                   {% if messages %}
+                {% for message in messages %}
+                 {% if message.tags == 'info' %}
+               <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{message}}
+             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+                 </button>
+                  </div>
+               {% endif %}
+                {% endfor %}
+               {% endif %}
+            <div class="table-responsive">
+            <table class="table table-hover table-center mb-0 datatable">
+            <thead>
+            <tr>
+                {% if patient %}
+            <th>Appointment Number</th>
+            <th>Patient Name</th>
+            <th>Date of Appointment</th>
+            <th>Time of Appointment</th>
+            <th>Creation Date</th>
+            <th>Status</th>
+            <th class="text-right">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for i in patient %}
+            <tr>
+        
+            <td>{{i.appointmentnumber}}</td>
+            <td>{{i.fullname}}</td>
+            <td>{{i.date_of_appointment}}</td>
+            <td>{{i.time_of_appointment}}</td>
+            <td>{{i.created_at}}</td>
+            {% if i.status == '0' %}
+                                                        <td>Not Updated Yet</td>
+                                                        {% else %}
+                                                        <td>{{ i.status}}</td>{% endif %}
+            <td class="text-right">
+            <div class="actions">
+            <a href="{% url 'viewappointmentdetails' i.id %}">
+            <i class="btn btn-primary btn-block">View</i>
+            </a>
+          
+            </div>
+            </td>
+            </tr> {% endfor %}
+           
+            </tbody>
+            {% else %}
+            {% if query %}
+                <p style="font-size: 20px;color: blue;text-align: center;">No records found for: "{{ query }}"</p>
+           
+            {% endif %}
+        
+            {% endif %}
+            </table>
+           
+            
+        
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+    </div>
+</div>
+<!-- Appointment End -->
+
+{% endblock %}
+

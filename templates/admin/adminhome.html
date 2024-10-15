@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row">
+          <div class="col-sm-12">
+             <h3 class="page-title">Welcome {{ user.first_name }} {{ user.last_name }}!!!!</h3>
+             <ul class="breadcrumb">
+                <li class="breadcrumb-item active">Dashboard</li>
+             </ul>
+          </div>
+       </div>
+    </div>
+    <div class="row">
+       <div class="col-xl-6 col-sm-6 col-12 d-flex">
+          <div class="card bg-one w-100">
+             <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                   <div class="db-icon">
+                      <i class="fas fa-user-graduate"></i>
+                   </div>
+                   <div class="db-info">
+                      <h3>{{doctor_count}}</h3>
+                      <a href="{% url 'viewdoctorlist' %}"><h6>Total Doctor</h6></a>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="col-xl-6 col-sm-6 col-12 d-flex">
+          <div class="card bg-two w-100">
+             <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                   <div class="db-icon">
+                      <i class="fas fa-crown"></i>
+                   </div>
+                   <div class="db-info">
+                      <h3>{{specialization_count}}</h3>
+                      <a href="{% url 'manage_specilizations' %}"><h6>Total Specialization</h6></a>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+     
+    </div>
+
+   
+</div>
+{% endblock %}

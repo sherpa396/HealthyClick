@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <title>Doctor Registration</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap"/>
+    <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css'%}"/>
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css'%}"/>
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css'%}"/>
+    <link rel="stylesheet" href="{% static 'assets/css/style.css'%}"/>
+  </head>
+
+  <body>
+    <div class="main-wrapper login-body">
+      <div class="login-wrapper">
+        <div class="container">
+          <div class="loginbox">
+            <div class="login-left">
+              <p style="text-align: center">
+                <strong><h2>Doctor Appointment System</h2></strong>
+              </p>
+            </div>
+            <div class="login-right">
+              <div class="login-right-wrap">
+                <h1>Sign Up</h1>
+                <p class="account-subtitle">Access to Doctor's dashboard</p>
+                <form action="" method="POST" enctype="multipart/form-data">
+                  {% if messages %}
+                  {% for message in messages %} {% if message.tags == 'error' %}
+                  <div
+                    class="alert alert-warning alert-dismissible fade show"
+                    role="alert"
+                  >
+                    {{message}}
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                  {% endif %}
+                  {% if messages %}
+                  {% for message in messages %} 
+                  {% if message.tags == 'success' %}
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{message}}
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                  {% endif %}
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <label>Profile Pic</label>
+                    <input
+                      id="pic"
+                      type="file"
+                      class="form-control"
+                      name="pic"
+                      required="true"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>First Name</label>
+                    <input
+                      id="first_name"
+                      type="text"
+                      class="form-control"
+                      placeholder="First Name"
+                      name="first_name"
+                      required="true"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Last Name</label>
+                    <input
+                      id="last_name"
+                      type="text"
+                      class="form-control"
+                      placeholder="Last Name"
+                      name="last_name"
+                      required="true"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input
+                      id="email"
+                      type="email"
+                      class="form-control"
+                      placeholder="Email"
+                      name="email"
+                      required="true"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Userame</label>
+                    <input
+                      id="username"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Username"
+                      name="username"
+                      required="true"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Mobile Number</label>
+                    <input
+                      id="mobno"
+                      type="text"
+                      class="form-control"
+                      placeholder="Mobile"
+                      name="mobno"
+                      maxlength="10"
+                      pattern="[0-9]+"
+                      required="true"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Specialization</label>
+                    <select type="text" name="specialization_id"
+                      id="specialization_id"
+                      value=""
+                      class="form-control"
+                      required="true"
+                    >
+                      <option value="">Choose Specialization</option>
+                      {% for i in specialization %}
+                      <option value="{{i.id}}">{{i.sname}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input
+                      id="password"
+                      type="password"
+                      class="form-control"
+                      placeholder="Password"
+                      name="password"
+                      required="true"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="submit">
+                      Register
+                    </button>
+                  </div>
+                </form>
+                <div class="text-center dont-have">
+                  <a href="{% url 'login' %}"
+                    >Do you have an account ? <br />
+                    Login</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'assets/js/jquery-3.6.0.min.js'%}"></script>
+    <script src="{% static 'assets/js/popper.min.js'%}"></script>
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'assets/js/script.js'%}"></script>
+  </body>
+</html>

@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <h3 class="page-title">Appointments</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'admin_home' %}">Dashboard</a></li>
+    <li class="breadcrumb-item active">View Aappointment</li>
+    </ul>
+    </div>
+    
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="card card-table">
+    <div class="card-body">
+        {% if messages %}
+        {% for message in messages %}
+         {% if message.tags == 'error' %}
+       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{message}}
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+         </button>
+          </div>
+       {% endif %}
+        {% endfor %}
+       {% endif %}
+           {% if messages %}
+        {% for message in messages %}
+         {% if message.tags == 'success' %}
+       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{message}}
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+         </button>
+          </div>
+       {% endif %}
+        {% endfor %}
+       {% endif %}
+    <div class="table-responsive">
+    <table class="table table-hover table-center mb-0 datatable">
+      {% for i in patientdetails %}
+      <tr><label style="font-size: medium;text-align: center;">Appointment Number: {{i.appointmentnumber}}</label></tr>
+        <tr>
+            
+            <th>Patient Name</th>
+            <td>{{i.fullname}}</td>
+            <th>Patient Contact Number</th>
+            <td>{{i.mobilenumber}}</td>
+          </tr>
+          <tr>
+            
+            <th>Patient Email</th>
+            <td>{{i.email}}</td>
+            <th>Date of Appointment</th>
+            <td>{{i.date_of_appointment}}</td>
+          </tr>
+          <tr>
+            
+            <th>Date of Time</th>
+            <td>{{i.time_of_appointment}}</td>
+            <th>Message</th>
+            <td>{{i.additional_msg}}</td>
+          </tr>
+          <tr>
+                              
+            {% if i.status == '0' %}
+            <th>Doctor Remark</th>
+            <td>Not Updatet Yet</td>
+            {% else %}
+            <tr>
+            <th>Doctor Remark</th>
+            <td>{{ i.remark}}</td>{% endif %}
+            
+              {% if i.status == '0' %}
+              <th>Staus</th>
+              <td>Not Updatet Yet</td>
+              {% else %}
+              <th>Status</th>
+              <td>{{ i.status}}</td> {% endif %}
+              </tr>
+          
+              <tr>
+                {% if i.status == 'Completed' %}
+                <th>Prescribed Medicine</th>
+                <td>{{ i.prescription}}</td>
+                {% else %}
+                <th>Prescribed Medicine</th>
+                <td>Not Prescribed Yet</td> {% endif %}
+                </tr>
+                <tr>
+                  {% if i.status == 'Completed' %}
+                  <th>Recommended Test</th>
+                  <td>{{ i.recommendedtest}}</td>
+                  {% else %}
+                  <th>Recommended Test</th>
+                  <td>Not Recommended Yet</td> {% endif %}
+                  </tr>
+    </table>
+    {% endfor %}
+ 
+    
+              </div>
+            
+              
+                        </div>
+    
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+{% endblock %}

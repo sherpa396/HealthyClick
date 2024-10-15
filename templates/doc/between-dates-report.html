@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <h3 class="page-title">Appointment Report</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'doctor_home' %}">Dashboard</a></li>
+    <li class="breadcrumb-item active">Between Dates Report of Appointment</li>
+    </ul>
+    </div>
+    
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm-12">
+        <div class="card-block">
+            <h4 class="sub-title">Between Dates Report</h4>
+            <form method="get" action="" enctype="multipart/form-data" action="{% url 'between_date_report' %}">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">From Date</label>
+                    <div class="col-sm-10">
+                        <input type="date" id="query" name="start_date" class="form-control" required="">
+                    </div>
+                </div>
+                 <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">To Date</label>
+                    <div class="col-sm-10">
+                        <input type="date" id="query" name="end_date" class="form-control" required="">
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-dark">Submit</button>
+                    </div>
+                </div>
+            </form>
+                    
+                        </div>
+    <div class="card card-table">
+
+    <div class="card-body">
+        {% if messages %}
+        {% for message in messages %}
+         {% if message.tags == 'error' %}
+       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{message}}
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+         </button>
+          </div>
+       {% endif %}
+        {% endfor %}
+       {% endif %}
+           {% if messages %}
+        {% for message in messages %}
+         {% if message.tags == 'success' %}
+       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{message}}
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+         </button>
+          </div>
+       {% endif %}
+        {% endfor %}
+       {% endif %}
+    <div class="table-responsive">
+    <table class="table table-hover table-center mb-0 datatable">
+    <thead>
+    <tr>
+        {% if patient %}
+        <p style="font-size: 20px;color: blue;text-align: center;">Data Between: "{{ start_date }} to {{ end_date }}"</p>
+    <th>Appointment Number</th>
+    <th>Patient Name</th>
+    <th>Date of Appointment</th>
+    <th>Time of Appointment</th>
+    <th>Creation Date</th>
+    <th>Status</th>
+    <th class="text-right">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for i in patient %}
+    <tr>
+
+    <td>{{i.appointmentnumber}}</td>
+    <td>{{i.fullname}}</td>
+    <td>{{i.date_of_appointment}}</td>
+    <td>{{i.time_of_appointment}}</td>
+    <td>{{i.created_at}}</td>
+    {% if i.status == '0' %}
+                                                <td>Not Updated Yet</td>
+                                                {% else %}
+                                                <td>{{ i.status}}</td>{% endif %}
+    <td class="text-right">
+    <div class="actions">
+    <a href="{% url 'patientappointmentdetails' i.id %}">
+    <i class="btn btn-primary btn-block">View</i>
+    </a>
+  
+    </div>
+    </td>
+    </tr> {% endfor %}
+   
+    </tbody>
+    </table>
+   
+                                        {% endif %}
+    
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+{% endblock %}
