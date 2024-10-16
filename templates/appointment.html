@@ -23,7 +23,6 @@
         <div class="row g-5">
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                 <h1 class="mb-4">Make An Appointment</h1>
-                {% comment %} <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p> {% endcomment %}
                 {% for i in page %}
                 <div class="bg-light rounded d-flex align-items-center p-5 mb-4">
                     <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-white" style="width: 55px; height: 55px;">
@@ -43,6 +42,7 @@
                         <h5 class="mb-0">{{i.email}}</h5>
                     </div>
                 </div>
+                <br>
                 <div class="bg-light rounded d-flex align-items-center p-5">
                     <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-white" style="width: 55px; height: 55px;">
                         <i class="fa fa-map-marker-alt text-primary me-2"></i>
@@ -81,15 +81,19 @@
                         {% endfor %}
                        {% endif %}
                         {% csrf_token %}
+                        <div>
+                            <h2><center>Patient's Details Form</center></h2>
+                        </div>
+                        <br>
                         <div class="row g-3">
                             <div class="col-12 col-sm-6">
-                                <input type="text" class="form-control border-0" placeholder="Your Name" style="height: 55px;" name="fullname" required="true">
+                                <input type="text" class="form-control border-0" placeholder="Full Name" style="height: 55px;" name="fullname" required="true">
                             </div>
                             <div class="col-12 col-sm-6">
-                                <input type="email" class="form-control border-0" placeholder="Your Email" style="height: 55px;" name="email" pattern="[^ @]*@[^ @]*" required="true">
+                                <input type="email" class="form-control border-0" placeholder="Email" style="height: 55px;" name="email" pattern="[^ @]*@[^ @]*" required="true">
                             </div>
                             <div class="col-12 col-sm-6">
-                                <input type="text" class="form-control border-0" placeholder="Your Mobile" style="height: 55px;" name="mobilenumber" maxlength="10" required="true">
+                                <input type="text" class="form-control border-0" placeholder="Contact Number" style="height: 55px;" name="mobilenumber" maxlength="10" required="true">
                             </div>
                             <div class="col-12 col-sm-6">
                                 <select class="form-select border-0" style="height: 55px;" name="doctor_id" required="true">
@@ -116,11 +120,15 @@
                             </div>
                             
                             <div class="col-12" style="padding-top: 20px;">
-                                <textarea class="form-control border-0" rows="5" placeholder="Describe your problem" name="additional_msg"></textarea>
+                                <textarea class="form-control border-0" rows="5" placeholder="Describe your symptoms" name="additional_msg"></textarea>
+                            </div>
+
+                            <div class="col-12" style="padding-top: 20px;" align="center">
+                                <a href="" class="btn btn-warning">Make Payment</a>
                             </div>
 
                             <div class="col-12" style="padding-top: 20px;">
-                                <button class="btn btn-primary w-100 py-3" type="submit">Book Appointment</button>
+                                <button class="btn btn-success w-100 py-3" type="submit">Book Appointment</button>
                             </div>
                         </div>
                     </form>
