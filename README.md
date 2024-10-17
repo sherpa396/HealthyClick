@@ -1,3 +1,11 @@
 #This project is for educational purpose only.
 
-We have used Django framework.
+#Programming Language used:
+1) Python
+2) JS
+
+#Database
+
+#Frontend
+1) HTML
+2) CSS
