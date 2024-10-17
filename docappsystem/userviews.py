@@ -13,6 +13,8 @@ from django.contrib import messages
 def USERBASE(request):
     return render(request, "userbase.html", context)
 
+def payment(request):
+    return render(request, "payment.html", context)
 
 def Index(request):
     doctorview = DoctorReg.objects.all()

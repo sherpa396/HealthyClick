@@ -65,7 +65,7 @@
           </tr>
           <tr>
             
-            <th>Date of Time</th>
+            <th>Appointment Time</th>
             <td>{{i.time_of_appointment}}</td>
             <th>Message</th>
             <td>{{i.additional_msg}}</td>
@@ -73,11 +73,11 @@
           <tr>
                               
             {% if i.status == '0' %}
-            <th>Doctor Remark</th>
+            <th>Doctor Remarks</th>
             <td>Not Updatet Yet</td>
             {% else %}
             <tr>
-            <th>Doctor Remark</th>
+            <th>Doctor Remarks</th>
             <td>{{ i.remark}}</td>{% endif %}
             
               {% if i.status == '0' %}

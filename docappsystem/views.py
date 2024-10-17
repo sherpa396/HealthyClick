@@ -25,7 +25,7 @@ def BASE(request):
 def LOGIN(request):
     return render(request, "login.html")
 
-def Payment(request):
+def PAYMENT(request):
     return render(request, "payment.html")
 
 

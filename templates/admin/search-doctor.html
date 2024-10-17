@@ -89,17 +89,12 @@
     <td>{{i.regdate_at}}</td>
     <td class="text-right">
     <div class="actions">
-    <a href="{% url 'viewdoctordetails' i.id %}" class="btn btn-sm bg-success-light mr-2">
-   View
-    </a>
-    <a href="{% url 'viewdoctorappointmentlist' i.id %}" class="btn btn-sm bg-danger-light">
-    Appointment List
-    </a>
+    <a href="{% url 'viewdoctordetails' i.id %}" class="btn btn-sm bg-success-light mr-2">View</a>
+    <a href="{% url 'viewdoctorappointmentlist' i.id %}" class="btn btn-sm bg-danger">Appointment List</a>
     </div>
     </td>
     </tr> {% endfor %}
 
-   
     </tbody>
     </table>
     {% else %}

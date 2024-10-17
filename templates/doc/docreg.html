@@ -63,7 +63,7 @@
                   {% endif %}
                   {% csrf_token %}
                   <div class="form-group">
-                    <label>Profile Pic</label>
+                    <label>Profile Picture</label>
                     <input
                       id="pic"
                       type="file"
@@ -161,10 +161,7 @@
                   </div>
                 </form>
                 <div class="text-center dont-have">
-                  <a href="{% url 'login' %}"
-                    >Do you have an account ? <br />
-                    Login</a
-                  >
+                  <a href="{% url 'login' %}">Do you have an account ? <br>Login</a>
                 </div>
               </div>
             </div>
