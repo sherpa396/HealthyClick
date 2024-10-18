@@ -124,7 +124,7 @@
                             </div>
 
                             <div class="col-12" style="padding-top: 20px;" align="center">
-                                <a href="" class="btn btn-warning">Make Payment</a>
+                                <button type="submit" class="btn-p" onClick="openPopup()">Payment</button>
                             </div>
 
                             <div class="col-12" style="padding-top: 20px;">
@@ -140,23 +140,20 @@
 <!-- Appointment End -->
 
 <!--Payment Section Start-->
-
-<button type="submit" class="btn" onClick="openPopup()">Payment</button>
+<div class="container-p">
     <div class="popup" id="popup">
         {% comment %} <img src="tick.png"> {% endcomment %}
-    <div class="container py-3">
-        <h1> Doctor's Consultation Fee</h1>
-        <form action="#" method="POST" class="payment-form">
+       <img src="{% static 'assets/img/tick.png'%}">
+        <h2> Doctor's Consultation Fee </h2>
+        <form>
             <div class="form-group">
                 <label for="patientName">Patient's Name</label>
                 <input type="text" id="patientName" name="patientName" required>
             </div>
-
             <div class="form-group">
                 <label for="amount">Amount</label>
                 <input type="number" id="amount" name="amount" value="200" readonly>
             </div>
-
             <div class="form-group">
                 <label for="cardNumber">Card Number</label>
                 <input type="number" id="cardNumber" name="cardNumber" required>
@@ -172,11 +169,158 @@
                 <input type="number" id="cvv" name="cvv" required>
             </div>
             <br>
-            <div class="centered-div">
-            <a href="success.html" type="submit" class="btn" >Pay Now</a>
-            </div>
-          </form>
-    </div>
+            <a href="#" type="submit" class="btn-btn" >Pay Now</a>
+        </form>
 </div>
+</div>
+<script>
+
+    let popup = document.getElementById("popup");
+    function openPopup(){
+        popup.classList.add("open-popup");
+    }
+    function closePopup(){
+        popup.classList.remove("open-popup");
+    }
+
+    </script>
+
+
+<style>
+
+    .container-p{
+        width: 100%;
+        height: 0vh;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+    
+    }
+
+    .btn-p {
+        width: 30%;
+        padding: 5px;
+        background-color: #0d9641; /* Bootstrap success color */
+        color: white;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        font-size: 18px;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .btn-p:hover {
+        background-color: #2608ab; /* Darker green on hover */
+    }
+
+    .btn-btn{
+        padding: 10px;
+        background: #0cc948;
+        border: 0;
+        color: white;
+        outline: none;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 500;
+        border-radius: 15px;
+        text-decoration: none;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    input[type=text],
+    input[type=number] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+    input[type=text]:focus,
+    input[type=number]:focus {
+    border-color: #66afe9;
+    outline: none;
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+        margin-top: 20px; /* Adjust top margin for smaller screens */
+        margin-bottom: 20px; /* Adjust bottom margin for smaller screens */
+    }
+}
+
+
+.popup{
+    width: 690px;
+    height: 730px;
+    background: #d6e4f6;
+    border-radius: 6px;
+    position: static;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #333;
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+}
+
+.open-popup{
+visibility: visible;
+top: 50%;
+transform: translate(-50%,-50%) scale(1);
+}
+
+.popup img{
+    width: 100px;
+    margin-top: -50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.popup img{
+    width: 100px;
+    margin-top: -50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+.popup h2{
+    font-size: 38px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+    }
+
+.popup button{
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px 0;
+    background: #6fd649;
+    color: #faf4f4;
+    border: 0;
+    outline: none;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+
+}
+</style>
 <!--Payment Section End-->
+<!-- Appointment End -->
+
 {% endblock %}
