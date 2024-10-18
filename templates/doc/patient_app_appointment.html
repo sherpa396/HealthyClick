@@ -31,9 +31,9 @@
          </button>
           </div>
        {% endif %}
-        {% endfor %}
+       {% endfor %}
        {% endif %}
-           {% if messages %}
+       {% if messages %}
         {% for message in messages %}
          {% if message.tags == 'success' %}
        <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -69,9 +69,9 @@
     <td>{{i.time_of_appointment}}</td>
     <td>{{i.created_at}}</td>
     {% if i.status == '0' %}
-                                                <td>Not Updated Yet</td>
-                                                {% else %}
-                                                <td>{{ i.status}}</td>{% endif %}
+    <td>Not Updated Yet</td>
+    {% else %}
+    <td>{{ i.status}}</td>{% endif %}
     <td class="text-right">
     <div class="actions">
     <a href="{% url 'patientappointmentdetails' i.id %}">

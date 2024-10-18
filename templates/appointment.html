@@ -139,7 +139,11 @@
 </div>
 <!-- Appointment End -->
 
-<body>
+<!--Payment Section Start-->
+
+<button type="submit" class="btn" onClick="openPopup()">Payment</button>
+    <div class="popup" id="popup">
+        {% comment %} <img src="tick.png"> {% endcomment %}
     <div class="container py-3">
         <h1> Doctor's Consultation Fee</h1>
         <form action="#" method="POST" class="payment-form">
@@ -173,7 +177,6 @@
             </div>
           </form>
     </div>
-    
-</body>
-
+</div>
+<!--Payment Section End-->
 {% endblock %}

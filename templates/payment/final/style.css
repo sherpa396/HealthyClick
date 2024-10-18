@@ -1,0 +1,165 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+}
+
+.container {
+    max-width: 300px;
+    margin: 50px auto;
+    padding: 0px;
+    /* background-color: white; */
+    border-radius: 25px;
+    /* box-shadow: 0 2px 10px rgba(13, 6, 6, 0.926); */
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type=text],
+input[type=number] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+input[type=text]:focus,
+input[type=number]:focus {
+    border-color: #66afe9;
+    outline: none;
+}
+
+.btn {
+    width: 70%;
+    padding: 15px;
+    background-color: #0d9641; /* Bootstrap success color */
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 25px;
+    align-items: center;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #2608ab; /* Darker green on hover */
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+        margin-top: 20px; /* Adjust top margin for smaller screens */
+        margin-bottom: 20px; /* Adjust bottom margin for smaller screens */
+    }
+}
+
+.centered-div {
+    width: 30%;          /* Set a width */
+    margin: 0 auto;     /* Center horizontally */
+    padding: 20px;
+}
+
+/* *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scrollbar-width: thin;
+} */
+
+.container{
+    width: 100%;
+    height: 50vh;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-btn{
+    padding: 15px;
+    background: #0cc948;
+    border: 0;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 15px;
+    text-decoration: none;
+}
+
+/* .btn-btn:hover {
+    background-color: #281775; Darker green on hover */
+
+.popup{
+    width: 450px;
+    background: #d6e4f6;
+    border-radius: 6px;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #333;
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+}
+
+.open-popup{
+visibility: visible;
+top: 50%;
+transform: translate(-50%,-50%) scale(1);
+}
+
+.popup img{
+    width: 100px;
+    margin-top: -50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.popup img{
+    width: 100px;
+    margin-top: -50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+.popup h2{
+    font-size: 38px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+    }
+
+.popup button{
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px 0;
+    background: #6fd649;
+    color: #faf4f4;
+    border: 0;
+    outline: none;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+
+}
