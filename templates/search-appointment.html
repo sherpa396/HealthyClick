@@ -93,15 +93,14 @@
             <td>{{i.time_of_appointment}}</td>
             <td>{{i.created_at}}</td>
             {% if i.status == '0' %}
-                                                        <td>Not Updated Yet</td>
-                                                        {% else %}
-                                                        <td>{{ i.status}}</td>{% endif %}
+            <td>Not Updated Yet</td>
+            {% else %}
+            <td>{{ i.status}}</td>{% endif %}
             <td class="text-right">
             <div class="actions">
             <a href="{% url 'viewappointmentdetails' i.id %}">
             <i class="btn btn-primary btn-block">View</i>
             </a>
-          
             </div>
             </td>
             </tr> {% endfor %}

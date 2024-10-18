@@ -124,7 +124,7 @@
                             </div>
 
                             <div class="col-12" style="padding-top: 20px;" align="center">
-                                <button type="submit" class="btn-p" onClick="openPopup()">Payment</button>
+                                <button type="button" class="btn-p" onClick="openPopup()">Payment</button>
                             </div>
 
                             <div class="col-12" style="padding-top: 20px;">
@@ -206,7 +206,7 @@
     .btn-p {
         width: 30%;
         padding: 5px;
-        background-color: #0d9641; /* Bootstrap success color */
+        background-color: #f702e3; /* Bootstrap success color */
         color: white;
         border: none;
         border-radius: 15px;
@@ -256,12 +256,11 @@
 @media (max-width: 480px) {
     .container {
         width: 90%;
-        padding: 15px;
+        padding: 25px;
         margin-top: 20px; /* Adjust top margin for smaller screens */
         margin-bottom: 20px; /* Adjust bottom margin for smaller screens */
     }
 }
-
 
 .popup{
     width: 690px;
@@ -277,6 +276,7 @@
     color: #333;
     visibility: hidden;
     transition: transform 0.4s, top 0.4s;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
 }
 
 .open-popup{
