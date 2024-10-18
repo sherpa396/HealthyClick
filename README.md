@@ -9,3 +9,9 @@
 #Frontend
 1) HTML
 2) CSS
+
+#creating requirement text
+=> python freeze > requirements.txt
+
+#installing requirement text
+=> pip install -r requirements.txt
