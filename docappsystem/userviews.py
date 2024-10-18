@@ -13,8 +13,8 @@ from django.contrib import messages
 def USERBASE(request):
     return render(request, "userbase.html", context)
 
-def payment(request):
-    return render(request, "payment.html", context)
+# def payment(request):
+#     return render(request, "payment.html", context)
 
 def Index(request):
     doctorview = DoctorReg.objects.all()
@@ -73,9 +73,7 @@ def create_appointment(request):
         )
 
         # Display a success message
-        messages.success(
-            request, "Your Appointment Request Has Been Sent. We Will Contact You Soon"
-        )
+        messages.success(request, "Your Appointment Request Has Been Sent. We Will Contact You Soon")
         return redirect("appointment")
 
     context = {"doctorview": doctorview, "page": page}

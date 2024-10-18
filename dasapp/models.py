@@ -32,9 +32,7 @@ class DoctorReg(models.Model):
 
     def __str__(self):
         if self.admin:
-            return (
-                f"{self.admin.first_name} {self.admin.last_name} - {self.mobilenumber}"
-            )
+            return (f"{self.admin.first_name} {self.admin.last_name} - {self.mobilenumber}")
         else:
             return f"User not associated - {self.mobilenumber}"
 

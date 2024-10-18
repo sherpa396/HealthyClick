@@ -9,10 +9,7 @@ from datetime import datetime
 def ADMINHOME(request):
     doctor_count = DoctorReg.objects.all().count
     specialization_count = Specialization.objects.all().count
-    context = {
-        "doctor_count": doctor_count,
-        "specialization_count": specialization_count,
-    }
+    context = {"doctor_count": doctor_count,"specialization_count": specialization_count,}
     return render(request, "admin/adminhome.html", context)
 
 
@@ -20,9 +17,7 @@ def ADMINHOME(request):
 def SPECIALIZATION(request):
     if request.method == "POST":
         specializationname = request.POST.get("specializationname")
-        specialization = Specialization(
-            sname=specializationname,
-        )
+        specialization = Specialization(sname=specializationname,)
         specialization.save()
         messages.success(request, "Specialization  Added Succeesfully!!!")
         return redirect("add_specilizations")
@@ -32,9 +27,7 @@ def SPECIALIZATION(request):
 @login_required(login_url="/")
 def MANAGESPECIALIZATION(request):
     specialization = Specialization.objects.all()
-    context = {
-        "specialization": specialization,
-    }
+    context = {"specialization": specialization,}
     return render(request, "admin/manage_specialization.html", context)
 
 
@@ -42,20 +35,14 @@ def DELETE_SPECIALIZATION(request, id):
     specialization = Specialization.objects.get(id=id)
     specialization.delete()
     messages.success(request, "Record Delete Succeesfully!!!")
-
     return redirect("manage_specilizations")
-
 
 login_required(login_url="/")
 
 
 def UPDATE_SPECIALIZATION(request, id):
     specialization = Specialization.objects.get(id=id)
-
-    context = {
-        "specialization": specialization,
-    }
-
+    context = {"specialization": specialization,}
     return render(request, "admin/update_specialization.html", context)
 
 
@@ -69,9 +56,7 @@ def UPDATE_SPECIALIZATION_DETAILS(request):
         sepcialization = Specialization.objects.get(id=sep_id)
         sepcialization.sname = sname
         sepcialization.save()
-        messages.success(
-            request, "Your specialization detail has been updated successfully"
-        )
+        messages.success(request, "Your specialization detail has been updated successfully")
         return redirect("manage_specilizations")
     return render(request, "admin/update_specialization.html")
 
@@ -79,30 +64,25 @@ def UPDATE_SPECIALIZATION_DETAILS(request):
 @login_required(login_url="/")
 def DoctorList(request):
     doctorlist = DoctorReg.objects.all()
-    context = {
-        "doctorlist": doctorlist,
-    }
+    context = {"doctorlist": doctorlist,}
     return render(request, "admin/doctor-list.html", context)
 
 
 def ViewDoctorDetails(request, id):
     doctorlist1 = DoctorReg.objects.filter(id=id)
     context = {"doctorlist1": doctorlist1}
-
     return render(request, "admin/doctor-details.html", context)
 
 
 def ViewDoctorAppointmentList(request, id):
     patientdetails = Appointment.objects.filter(doctor_id=id)
     context = {"patientdetails": patientdetails}
-
     return render(request, "admin/doctor_appointment_list.html", context)
 
 
 def ViewPatientDetails(request, id):
     patientdetails = Appointment.objects.filter(id=id)
     context = {"patientdetails": patientdetails}
-
     return render(request, "admin/patient_appointment_details.html", context)
 
 

@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
 <div class="content container-fluid">
     <div class="page-header">
        <div class="row">
           <div class="col-sm-12">
-             <h3 class="page-title">Welcome {{ user.first_name }} {{ user.last_name }}, Have a great day !</h3>
+             <h3 class="page-title"> नमस्कार, {{ user.first_name }} {{ user.last_name }}, शुभ दिन !!!</h3>
              <ul class="breadcrumb">
                 <li class="breadcrumb-item active">Dashboard</li>
              </ul>
@@ -44,9 +43,7 @@
              </div>
           </div>
        </div>
-     
     </div>
-
-   
 </div>
+
 {% endblock %}
