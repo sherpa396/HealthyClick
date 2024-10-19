@@ -53,11 +53,11 @@ urlpatterns = [
         name="viewpatientdetails",
     ),
     path("SearchDoctor", adminviews.Search_Doctor, name="search_doctor"),
-    path(
-        "DoctorBetweenDateReport",
-        adminviews.Doctor_Between_Date_Report,
-        name="doctor_between_date_report",
-    ),
+    # path(
+    #     "DoctorBetweenDateReport",
+    #     adminviews.Doctor_Between_Date_Report,
+    #     name="doctor_between_date_report",
+    # ),
     
     # Website Page
     path("Website/update", adminviews.WEBSITE_UPDATE, name="website_update"),
@@ -117,7 +117,7 @@ urlpatterns = [
         name="patientappointmentcompleted",
     ),
     path("SearchAppointment", docviews.Search_Appointments, name="search_appointment"),
-    path("BetweenDateReport", docviews.Between_Date_Report, name="between_date_report"),
+    # path("BetweenDateReport", docviews.Between_Date_Report, name="between_date_report"),
     
     # This is User Panel
     path("userbase/", userviews.USERBASE, name="userbase"),
