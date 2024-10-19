@@ -34,9 +34,9 @@
                            {% endif %}
                             {% endfor %}
                            {% endif %}
-                               {% if messages %}
-                            {% for message in messages %}
-                             {% if message.tags == 'success' %}
+                           {% if messages %}
+                           {% for message in messages %}
+                           {% if message.tags == 'success' %}
                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
                           {{message}}
                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -44,11 +44,10 @@
                              </button>
                               </div>
                            {% endif %}
-                            {% endfor %}
+                           {% endfor %}
                            {% endif %}
                         <form action="{% url 'doLogin' %}"  method="POST" >
                             {% csrf_token %}
-                            
                             
                            <div class="form-group">
                             <input type="email" class="form-control" placeholder="Your Email Address" name="email">
@@ -60,8 +59,6 @@
                               <button class="btn btn-primary btn-block" type="submit">Login</button>
                            </div>
                         </form>
-                        
-                     
                         <div class="btn btn-primary btn-block"><a href="{% url 'docsignup' %}">Doctor Signup</a></div>
                         <div class="btn btn-primary btn-block"><a href="{% url 'index' %}">Home Page</a></div>
                      </div>

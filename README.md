@@ -11,6 +11,10 @@
 1) HTML
 2) CSS
 
+#Version Control
+1) Git
+2) Github
+
 #creating requirement text
 => python freeze > requirements.txt
 

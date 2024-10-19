@@ -15,8 +15,6 @@
 </div>
 <!-- Page Header End -->
 
-
-
 <!-- Appointment Start -->
 <div class="container-xxl py-12">
     <div class="container">
@@ -38,10 +36,8 @@
                     <br>
                         <button type="submit" class="btn btn-primary btn-user btn-block">Search</button>    
                                 </form>
-                            
                                 </div>
                                 <br>
-                                
             <div class="card card-table">
         
             <div class="card-body">
@@ -55,11 +51,11 @@
                  </button>
                   </div>
                {% endif %}
-                {% endfor %}
+               {% endfor %}
                {% endif %}
-                   {% if messages %}
-                {% for message in messages %}
-                 {% if message.tags == 'info' %}
+               {% if messages %}
+               {% for message in messages %}
+               {% if message.tags == 'info' %}
                <div class="alert alert-warning alert-dismissible fade show" role="alert">
               {{message}}
              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -109,14 +105,9 @@
             {% else %}
             {% if query %}
                 <p style="font-size: 20px;color: blue;text-align: center;">No records found for: "{{ query }}"</p>
-           
             {% endif %}
-        
             {% endif %}
             </table>
-           
-            
-        
             </div>
             </div>
             </div>
