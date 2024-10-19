@@ -62,7 +62,7 @@
 
     ```
 
-## Download this project zip folder and extract it & Move to project folder in terminal. Then run following commands :
+## Run following commands :
 Command for Window PC
    ```
     py manage.py makemigrations
