@@ -5,6 +5,7 @@
 2) JS
 
 #Database
+1) SQLite
 
 #Frontend
 1) HTML
