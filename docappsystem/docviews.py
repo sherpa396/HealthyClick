@@ -33,8 +33,8 @@ def DOCSIGNUP(request):
                 user_type=2,
                 profile_pic=pic,
             )
-            user.set_password(password)
-            user.save()
+            user.set_password(password) # Set the user's password securely
+            user.save() ## Save the user to the database
             spid = Specialization.objects.get(id=specialization_id)
             doctor = DoctorReg(
                 admin=user,
