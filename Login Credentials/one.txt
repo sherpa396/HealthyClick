@@ -1,0 +1,50 @@
+                        #####Doctor Details#####
+
+Username	Email	            First Name	    Last Name	Phone	        Pswd
+doc1	    doc1@gmail.com	    Bhagawan	    Koirala	    9845655456	    doc1
+doc2	    doc2@gmail.com	    Sanduk	        Ruit	    9765124565	    doc2
+doc3	    doc3@gmail.com	    Dr. Mandeep	    Gautam	    9845681585	    doc3
+doc4	    doc4@gmail.com	    Dr. Lalit	    Mishra	    9812345678	    doc4
+					
+					
+
+                                    #####Pateint Details#####
+
+Full Name	            Email	                Number	            Issue
+Prithvi Narayan Shah	pat1@gmail.com	        9812345678	        Fever, Nausea, Headache from last 2 weeks
+Bhimsen Thapa	        pat2@gmail.com	        9745645325	        Backache from 20 days continuously
+Siddhartha Gautam	    pat3@gmail.com	        9701234567	        Toothache from 15 days
+Manisha Koirala	        pat4@gmail.com	        9823456789	        Stomach from 25 days
+Nirmal Purja	        pat5@gmail.com	        9834567890	        Allergy from spider and itching
+Sanjay Gupta	        pat6@gmail.com	        9845678901	        Vomiting, seen blood in vomit
+Sandeep Lamichhane	    pat7@gmail.com	        9856789012	        General checkup, followup
+Nima Rumba	            pat8@gmail.com	        9867890123	        Chest pain from past two weeks
+Pratik Gurung 	        pat9@gmail.com	        9878901234	        Fever, Nausea, Headache from last 2 weeks
+Sita Devi Yadav	        pat10@gmail.com	        9889012345	        Backache from 20 days continuously
+Arjun Karki	            pat11@gmail.com	        9890123456	        Toothache from 15 days
+Ram Shah	            pat12@gmail.com	        9802345678	        Stomach from 25 days
+Sagar Dhakal	        pat13@gmail.com	        9813456789	        Allergy from spider and itching
+Mohan Stha	            pat14@gmail.com	        9824567890	        Vomiting, seen blood in vomit
+Dawa Lama	            pat15@gmail.com	        9835678901	        General checkup, followup
+Chandra Ghale	        pat16@gmail.com	        9846789012	        Chest pain from past two weeks
+Pawan Klyan	            pat17@gmail.com	        9857890123	        Fever, Nausea, Headache from last 2 weeks
+Nirmal Dahal	        pat18@gmail.com	        9868901234	        Backache from 20 days continuously
+Naresh Lamsal	        pat19@gmail.com	        9879012345	        Toothache from 15 days
+Bijay Tamang	        pat20@gmail.com	        9880123456	        General checkup, followup
+
+### Total 20 ###
+
+
+
+###Django Admin###
+Username: admin
+Email: admin@gmail.com
+Password: admin
+		
+
+###Hospital Admin###
+Username |hospitaladmin	                | hospital
+Email    |hospitaladmin123@gmail.com	| hospital@gmail.com
+Password |hospitaladmin	                | hospital
+
+
