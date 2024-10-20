@@ -32,7 +32,7 @@ def create_appointment(request):
     page = Page.objects.all()
 
     if request.method == "POST":
-        appointmentnumber = random.randint(100000000, 999999999)
+        appointmentnumber = random.randint(100000000, 999999999) # Generate a random appointment number
         fullname = request.POST.get("fullname")
         email = request.POST.get("email")
         mobilenumber = request.POST.get("mobilenumber")
@@ -40,6 +40,8 @@ def create_appointment(request):
         time_of_appointment = request.POST.get("time_of_appointment")
         doctor_id = request.POST.get("doctor_id")
         additional_msg = request.POST.get("additional_msg")
+        # payment = request.POST.GET("payment")
+        
 
         # Retrieve the DoctorReg instance using the doctor_id
         doc_instance = DoctorReg.objects.get(id=doctor_id)
@@ -70,10 +72,12 @@ def create_appointment(request):
             time_of_appointment=time_of_appointment,
             doctor_id=doc_instance,
             additional_msg=additional_msg,
+            # payment=payment,
+            
         )
 
         # Display a success message
-        messages.success(request, "Your Appointment Request Has Been Sent. We Will Contact You Soon")
+        messages.success(request, "Your appointment request has been sent. We will contact you soon !!1")
         return redirect("appointment")
 
     context = {"doctorview": doctorview, "page": page}
@@ -110,4 +114,19 @@ def View_Appointment_Details(request, id):
 
     return render(request, "user_appointment-details.html", context)
 
+# def invoice_view(request, patient_id):
+#     # Fetch patient details based on the provided patient_id
+#     patient_details = Appointment.objects.get(id=patient_id)
+    
+#     context = {
+#         'doctor_remarks': patient_details.remark,
+#         'prescribed_medicine': patient_details.medicine,  # Adjust based on your model
+#         'recommended_test': patient_details.test,  # Adjust based on your model
+#         'total_doctor_fee': patient_details.fee, #
+#         'doctor_name': patient_details.doctor_name,  # Adjust based on your model
+#     }
+    
+#     return render(request, 'pdf_template.html', context)
+    
+    
 

@@ -5,6 +5,12 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from dasapp.models import CustomUser
 from django.contrib.auth import get_user_model
+from django.shortcuts import render
+from io import BytesIO
+from django.http import HttpResponse
+from django.template.loader import get_template
+from django.views import View
+from xhtml2pdf import pisa
 # from .utils import send_email_to_client
 
 # from django.http import JsonResponse
@@ -132,13 +138,6 @@ def CHANGE_PASSWORD(request):
 #     return JsonResponse({'available': True})
 
 
-from django.shortcuts import render
-from io import BytesIO
-from django.http import HttpResponse
-from django.template.loader import get_template
-from django.views import View
-from xhtml2pdf import pisa
-
 def render_to_pdf(template_src, context_dict={}):
 	template = get_template(template_src)
 	html  = template.render(context_dict)
@@ -179,3 +178,6 @@ class DownloadPDF(View):
 def index(request):
 	context = {}
 	return render(request, 'index.html', context)
+
+
+

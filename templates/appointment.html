@@ -123,7 +123,7 @@
                                 <textarea class="form-control border-0" rows="5" placeholder="Describe your symptoms" name="additional_msg"></textarea>
                             </div>
 
-                            <div class="col-12" style="padding-top: 20px;" align="center">
+                            <div class="col-12" style="padding-top: 20px;" name="payment" align="center">
                                 <button type="button" class="btn-p" onClick="openPopup()">Payment</button>
                             </div>
 
@@ -165,10 +165,12 @@
 
             <div class="form-group">
                 <label for="cvv">CVV</label>
-                <input type="number" id="cvv" name="cvv" required>
+                <input type="text" id="cvv" name="cvv" maxlength="3" required>
             </div>
             <br>
-            <a href="#" type="submit" class="btn-btn" >Pay Now</a>
+            {% comment %} <form method="POST" action="{% url 'appointment' %}"> {% endcomment %}
+
+            <button class="btn-btn" type="success" >Pay Now</button>
         </form>
 </div>
 </div>

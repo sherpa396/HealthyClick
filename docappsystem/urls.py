@@ -138,6 +138,7 @@ urlpatterns = [
         userviews.View_Appointment_Details,
         name="viewappointmentdetails",
     ),
+    # path("ViewInvoice", userviews.invoice_view,  name="ViewInvoice"),
     
     # profile path
     path("Profile", views.PROFILE, name="profile"),

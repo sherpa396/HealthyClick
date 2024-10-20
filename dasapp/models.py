@@ -22,9 +22,7 @@ class Specialization(models.Model):
 
 
 class DoctorReg(models.Model):
-    admin = models.OneToOneField(
-        CustomUser, on_delete=models.CASCADE, null=True, blank=True
-    )
+    admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True, blank=True)
     mobilenumber = models.CharField(max_length=11)
     specialization_id = models.ForeignKey(Specialization, on_delete=models.CASCADE)
     regdate_at = models.DateTimeField(auto_now_add=True)
@@ -68,3 +66,13 @@ class Page(models.Model):
 
     def __str__(self):
         return self.pagetitle
+    
+# class Payment(models.Model):
+#     patientname = models.CharField(max_length=250)
+#     amount = models.IntegerField(max_length=25)
+#     cardnumber = models.TextField()
+#     expirydate = models.IntegerField(max_length=20)
+#     cvv = models.IntegerField()
+
+#     def __str__(self):
+#         return self.patientname
