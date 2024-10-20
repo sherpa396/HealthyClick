@@ -109,3 +109,5 @@ def View_Appointment_Details(request, id):
     context = {"patientdetails": patientdetails, "page": page}
 
     return render(request, "user_appointment-details.html", context)
+
+

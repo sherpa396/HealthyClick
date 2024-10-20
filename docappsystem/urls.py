@@ -12,6 +12,11 @@ urlpatterns = [
     path("doLogout", views.doLogout, name="logout"),
     path("payment", views.PAYMENT, name="payment"),
     
+    # pdf  print section
+	# path('', views.index),
+    path('pdf_view/', views.ViewPDF.as_view(), name="pdf_view"),
+    path('pdf_download/', views.DownloadPDF.as_view(), name="pdf_download"),
+    
     
     # This is admin panel
     path("Admin/AdminHome", adminviews.ADMINHOME, name="admin_home"),

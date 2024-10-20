@@ -1,0 +1,72 @@
+<html>
+	<title>Invoice Card</title>
+<head>
+<style>
+	.container {
+		text-align: center;
+        color: black;
+        font-size: 25px;
+    }
+
+	.details{
+		font-size: 14px;
+	}
+
+	.bill{
+		text-align: left;
+        color: black;
+        font-size: 16px;
+	}
+
+	table {
+		border-collapse: collapse;
+		border: 1px solid black;
+		font-size: 25px;
+	}
+	
+	th, td {
+		border: 1px solid gray;
+	}
+	
+</style>
+</head>
+
+<body>
+    <div class="container">
+		HealthyClick - Doctor Appointment System
+		<br>
+		Boudha, Kathmandu, Nepal
+		<br>
+	</div>
+	<div class="details">
+		{% comment %} Name:{{website}}<br> {% endcomment %}
+		Address: {{address}}<br>
+		Phone: {{phone}}<br>
+		Email: {{email}}<br>
+	</div>
+
+	<hr>
+
+	<center class="details">
+		<h1>Prescription & Invoice</h1>
+	</center>
+    </div>
+<hr>
+<div class="bill">
+		{% comment %} {% for i in patientdetails %} {% endcomment %}
+	<tr>
+		Doctor Remarks : <td>{{ i.remark}}</td><br>
+		Prescribed Medicine : <td></td><br>
+		Recommended Test : <td></td>
+	</tr>
+</div>
+
+<div class="bill">
+Total Doctor Fee:
+	<br>
+Doctor's Name:
+{% comment %} {% endfor %} {% endcomment %}
+</div>
+</body>
+
+</html>
