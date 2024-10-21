@@ -5,16 +5,14 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from dasapp.models import CustomUser
 from django.contrib.auth import get_user_model
-from django.shortcuts import render
 from io import BytesIO
 from django.http import HttpResponse
 from django.template.loader import get_template
 from django.views import View
 from xhtml2pdf import pisa
 # from .utils import send_email_to_client
-
+# from django.shortcuts import render
 # from django.http import JsonResponse
-# from .models import Appointment
 
 
 # def send_email(request):
@@ -31,8 +29,7 @@ def BASE(request):
 def LOGIN(request):
     return render(request, "login.html")
 
-def PAYMENT(request):
-    return render(request, "payment.html")
+
 
 
 def doLogout(request):
@@ -162,18 +159,6 @@ class ViewPDF(View):
 		pdf = render_to_pdf('pdf_template.html', data)
 		return HttpResponse(pdf, content_type='application/pdf')
 
-
-#Automaticly downloads to PDF file
-class DownloadPDF(View):
-	def get(self, request, *args, **kwargs):
-		
-		pdf = render_to_pdf('pdf_template.html', data)
-
-		response = HttpResponse(pdf, content_type='application/pdf')
-		filename = "Invoice_%s.pdf" %("12341231")
-		content = "attachment; filename='%s'" %(filename)
-		response['Content-Disposition'] = content
-		return response
 
 def index(request):
 	context = {}

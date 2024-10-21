@@ -115,7 +115,8 @@
 
                             <div class="col-12 col-sm-6">
                                 <div class="time" id="time" data-target-input="nearest"></div>
-                                    <input type="time" class="form-control border-0" placeholder="Choose Time" data-target="#time" data-toggle="datetimepicker" style="height: 55px;" name="time_of_appointment" step="60" required="true">
+                                    <input type="time" class="form-control border-0" placeholder="Choose Time" data-target="#time"
+                                    data-toggle="datetimepicker" style="height: 55px;" name="time_of_appointment" step="600" required="true">
                                 </div>
                             </div>
                             
@@ -123,12 +124,12 @@
                                 <textarea class="form-control border-0" rows="5" placeholder="Describe your symptoms" name="additional_msg"></textarea>
                             </div>
 
-                            <div class="col-12" style="padding-top: 20px;" name="payment" align="center">
-                                <button type="button" class="btn-p" onClick="openPopup()">Payment</button>
-                            </div>
-
                             <div class="col-12" style="padding-top: 20px;">
                                 <button class="btn btn-success w-100 py-3" type="submit">Book Appointment</button>
+                            </div>
+
+                            <div class="col-12" style="padding-top: 20px;" name="payment" align="center" style="display: none;">
+                                <button type="button" class="btn-p" onClick="openPopup()">Payment</button>
                             </div>
                         </div>
                     </form>
@@ -145,7 +146,8 @@
         {% comment %} <img src="tick.png"> {% endcomment %}
        <img src="{% static 'assets/img/tick.png'%}">
         <h2> Doctor's Consultation Fee </h2>
-        <form>
+        <form  action="{% url 'appointment' %}" method="POST">
+            {% csrf_token %}
             <div class="form-group">
                 <label for="patientName">Patient's Name</label>
                 <input type="text" id="patientName" name="patientName" required>
@@ -170,12 +172,13 @@
             <br>
             {% comment %} <form method="POST" action="{% url 'appointment' %}"> {% endcomment %}
 
-            <button class="btn-btn" type="success" >Pay Now</button>
+            <button class="btn-btn" type="submit" value="POST" > Pay Now </button>
         </form>
 </div>
 </div>
 
 <script>
+    
     let popup = document.getElementById("popup");
     function openPopup(){
         popup.classList.add("open-popup");
@@ -204,14 +207,14 @@
     }
 
     .btn-p {
-        width: 30%;
-        padding: 5px;
-        background-color: #f702e3; /* Bootstrap success color */
+        width: 60%;
+        padding: 10px;
+        background-color: #1703fc; /* Bootstrap success color */
         color: white;
         border: none;
         border-radius: 15px;
         cursor: pointer;
-        font-size: 18px;
+        font-size: 20px;
         align-items: center;
         text-decoration: none;
     }

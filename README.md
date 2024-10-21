@@ -47,10 +47,6 @@
 * Can view/download Invoice pdf (Only when that patient is discharged by admin).
 
 
-## Problem Modules
-
-## The website has been hosted at
-
 ## To run the program offline, follow the following steps:
 * Install Python(3.7.6) (Don't Forget to Tick Add to Path while installing Python).
 * Open Terminal and Execute Following Commands :
@@ -61,25 +57,22 @@
     pip install Pillow
 
     ```
-
-## Run following commands :
-Command for Window PC
+* Run following commands :
    ```
     py manage.py makemigrations
     py manage.py migrate
     py manage.py runserver
    ```
-
-  
+   
 * Now enter following URL in Your Browser Installed On Your Pc
 
     ```http://127.0.0.1:8000/  ```
  
  ## CHANGES REQUIRED
+ * Admin can assign doctor to patient.
  
 
 ## Drawbacks/LoopHoles
-* A gmail account is needed to provide feedback, and the user needs to turn on access for less secure apps.
 * An initial admin account is needed for approving all other accounts.
 
 

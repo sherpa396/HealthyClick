@@ -4,17 +4,32 @@ import random
 from datetime import datetime
 from django.contrib import messages
 # from .utils import send_email_to_client
+# from .models import Payment
+
 
 
 # def send_email(request):
 #     send_email_to_client()
 #     return redirect('/')
 
+
+def PAYMENT(request):
+    return render(request, "appointment.html")
+
 def USERBASE(request):
     return render(request, "userbase.html", context)
 
-# def payment(request):
-#     return render(request, "payment.html", context)
+def payment(request):
+    paymentview = payment.objects.all()
+    page = Page.objects.all()
+    if request.method == "POST":
+        payment = request.POST.GET("payment")
+
+        # Display a success message
+        messages.success(request, "Payment Successful !")
+        return redirect("appointment")
+            
+            
 
 def Index(request):
     doctorview = DoctorReg.objects.all()
@@ -32,7 +47,7 @@ def create_appointment(request):
     page = Page.objects.all()
 
     if request.method == "POST":
-        appointmentnumber = random.randint(100000000, 999999999) # Generate a random appointment number
+        appointmentnumber = random.randint(100000000, 999999999)
         fullname = request.POST.get("fullname")
         email = request.POST.get("email")
         mobilenumber = request.POST.get("mobilenumber")
@@ -40,7 +55,7 @@ def create_appointment(request):
         time_of_appointment = request.POST.get("time_of_appointment")
         doctor_id = request.POST.get("doctor_id")
         additional_msg = request.POST.get("additional_msg")
-        # payment = request.POST.GET("payment")
+        
         
 
         # Retrieve the DoctorReg instance using the doctor_id
@@ -77,8 +92,21 @@ def create_appointment(request):
         )
 
         # Display a success message
-        messages.success(request, "Your appointment request has been sent. We will contact you soon !!1")
+        messages.success(request, "Your Appointment Request Has Been Sent. We Will Contact You Soon")
         return redirect("appointment")
+    
+    
+        # paymentdetails = Payment.objects.create(
+        #     patient_name = patient_name,
+        #     amount =amount,
+        #     cardnumber =cardnumber,
+        #     expirydate =expirydate,
+        #     cvv =cvv,
+        # )
+
+        # # Display a success message
+        # # message.success(request, "Payment Successful !!")
+        # return redirect("appointment")
 
     context = {"doctorview": doctorview, "page": page}
     return render(request, "appointment.html", context)
@@ -114,19 +142,16 @@ def View_Appointment_Details(request, id):
 
     return render(request, "user_appointment-details.html", context)
 
-# def invoice_view(request, patient_id):
-#     # Fetch patient details based on the provided patient_id
-#     patient_details = Appointment.objects.get(id=patient_id)
-    
-#     context = {
-#         'doctor_remarks': patient_details.remark,
-#         'prescribed_medicine': patient_details.medicine,  # Adjust based on your model
-#         'recommended_test': patient_details.test,  # Adjust based on your model
-#         'total_doctor_fee': patient_details.fee, #
-#         'doctor_name': patient_details.doctor_name,  # Adjust based on your model
-#     }
-    
-#     return render(request, 'pdf_template.html', context)
-    
-    
 
+def invoice_view(request, id):
+    # Fetch patient details based on the provided patient_id
+    patient_details = Appointment.objects.get(id=id)
+    
+    context = {
+        'doctor_remarks': patient_details.remark,
+        'prescribed_medicine': patient_details.prescription,  # Adjust based on your model
+        'recommended_test': patient_details.recommendedtest,  # Adjust based on your model
+        'doctor_name': patient_details.fullname,  # Adjust based on your model
+    }
+    
+    return render(request, 'pdf_template.html', context)

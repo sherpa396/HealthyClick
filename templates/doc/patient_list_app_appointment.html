@@ -9,7 +9,7 @@
     <h3 class="page-title">Appointments</h3>
     <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="{% url 'doctor_home' %}">Dashboard</a></li>
-    <li class="breadcrumb-item active">View Aappointment</li>
+    <li class="breadcrumb-item active">Patient List</li>
     </ul>
     </div>
     </div>
@@ -96,8 +96,8 @@
         </span>
 
         {% if view_appointment.has_next %}
-            <a href="?page={{ view_appointment.next_page_number }}">Next</a>
-            <a href="?page={{ view_appointment.paginator.num_pages }}">Last &raquo;</a>
+        <a href="?page={{ view_appointment.next_page_number }}">Next</a>
+        <a href="?page={{ view_appointment.paginator.num_pages }}">Last &raquo;</a>
         {% endif %}
     </span>
 </div>

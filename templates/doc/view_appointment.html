@@ -10,7 +10,7 @@
           <li class="breadcrumb-item">
             <a href="{% url 'doctor_home' %}">Dashboard</a>
           </li>
-          <li class="breadcrumb-item active">View Aappointment</li>
+          <li class="breadcrumb-item active">All Appointment</li>
         </ul>
       </div>
     </div>
@@ -99,20 +99,11 @@
             </table>
 
             <!-- Pagination controls -->
-            <div
-              class="pagination"
-              style="
-                padding-top: 20px;
-                padding-bottom: 20px;
-                text-align: center;
-              "
-            >
+            <div class="pagination"style="padding-top: 20px; padding-bottom: 20px; text-align: center;">
               <span class="step-links">
                 {% if view_appointment.has_previous %}
                 <a href="?page=1">&laquo; First</a>
-                <a href="?page={{ view_appointment.previous_page_number }}"
-                  >Previous</a
-                >
+                <a href="?page={{ view_appointment.previous_page_number }}">Previous</a>
                 {% endif %}
 
                 <span class="current">

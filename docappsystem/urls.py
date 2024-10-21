@@ -10,12 +10,12 @@ urlpatterns = [
     path("login/", views.LOGIN, name="login"),
     path("doLogin", views.doLogin, name="doLogin"),
     path("doLogout", views.doLogout, name="logout"),
-    path("payment", views.PAYMENT, name="payment"),
+    # path("payment", views.PAYMENT, name="payment"),
     
     # pdf  print section
 	# path('', views.index),
     path('pdf_view/', views.ViewPDF.as_view(), name="pdf_view"),
-    path('pdf_download/', views.DownloadPDF.as_view(), name="pdf_download"),
+    # path('pdf_download/', views.DownloadPDF.as_view(), name="pdf_download"),
     
     
     # This is admin panel
@@ -138,8 +138,9 @@ urlpatterns = [
         userviews.View_Appointment_Details,
         name="viewappointmentdetails",
     ),
-    # path("ViewInvoice", userviews.invoice_view,  name="ViewInvoice"),
     
+    path("ViewInvoice", userviews.invoice_view,  name="ViewInvoice"),
+
     # profile path
     path("Profile", views.PROFILE, name="profile"),
     path("Profile/update", views.PROFILE_UPDATE, name="profile_update"),

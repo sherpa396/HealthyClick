@@ -53,21 +53,12 @@
     </div>
 <hr>
 <div class="bill">
-		{% comment %} {% for i in patientdetails %} {% endcomment %}
-	<tr>
-		Doctor Remarks : <td></td><br>
-		Prescribed Medicine : <td></td><br>
-		Recommended Test : <td></td>
-	</tr>
+		Doctor Remarks : {{remark}}<br>
+		Prescribed Medicine : {{prescription}}<br>
+		Recommended Test :{{recommendedtest}}<br>
+		Total Doctor Fee:  Nrs.200 <br>
+		Doctor's Name:{{doctor_name}}
 </div>
 
-<div class="bill">
-Total Doctor Fee:
-	<br>
-Doctor's Name:
-{% comment %} {% endfor %} {% endcomment %}
-</div>
 </body>
-
-
 </html>

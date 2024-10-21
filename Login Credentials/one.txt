@@ -1,4 +1,4 @@
-                        #####Doctor Details#####
+                                     #####Doctor Details#####
 
 Username	Email	            First Name	    Last Name	Phone	        Pswd
 doc1	    doc1@gmail.com	    Bhagawan	    Koirala	    9845655456	    doc1

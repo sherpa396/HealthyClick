@@ -67,12 +67,12 @@ class Page(models.Model):
     def __str__(self):
         return self.pagetitle
     
-# class Payment(models.Model):
-#     patientname = models.CharField(max_length=250)
-#     amount = models.IntegerField(max_length=25)
-#     cardnumber = models.TextField()
-#     expirydate = models.IntegerField(max_length=20)
-#     cvv = models.IntegerField()
+class Payment(models.Model):
+    patient_name = models.CharField(max_length=250)
+    amount = models.IntegerField()
+    cardnumbers = models.TextField(blank=True, default=0)
+    expirydate = models.IntegerField()
+    cvv = models.IntegerField()
 
-#     def __str__(self):
-#         return self.patientname
+    def __str__(self):
+        return self.patient_name
