@@ -1,11 +1,9 @@
-{% comment %} <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-   {% load static %}
 <head>
    <title>Payment Page</title>
    {% comment %} <link rel="stylesheet" href="style2.css"> <!-- Link to CSS file --> {% endcomment %}
 
-{% comment %} <link rel="stylesheet" href="{% static 'assets/css/style2.css'%}">
 </head>
 
 <body>
@@ -42,6 +40,144 @@
             </div>
           </form>
     </div>
-    
 </body>
-</html> {% endcomment %}
+
+
+<style>
+
+    .container-p{
+        width: 100%;
+        height: 0vh;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+    
+    }
+
+    .btn-p {
+        width: 60%;
+        padding: 10px;
+        background-color: #1703fc; /* Bootstrap success color */
+        color: white;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        font-size: 20px;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .btn-p:hover {
+        background-color: #2608ab; /* Darker green on hover */
+    }
+
+    .btn-btn{
+        padding: 10px;
+        background: #0cc948;
+        border: 0;
+        color: white;
+        outline: none;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 500;
+        border-radius: 15px;
+        text-decoration: none;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    input[type=text],
+    input[type=number] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+    input[type=text]:focus,
+    input[type=number]:focus {
+    border-color: #66afe9;
+    outline: none;
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 90%;
+        padding: 25px;
+        margin-top: 20px; /* Adjust top margin for smaller screens */
+        margin-bottom: 20px; /* Adjust bottom margin for smaller screens */
+    }
+}
+
+.popup{
+    width: 690px;
+    height: 730px;
+    background: #d6e4f6;
+    border-radius: 6px;
+    position: static;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #333;
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.open-popup{
+visibility: visible;
+top: 50%;
+transform: translate(-50%,-50%) scale(1);
+}
+
+.popup img{
+    width: 100px;
+    margin-top: -50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.popup img{
+    width: 100px;
+    margin-top: -50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+.popup h2{
+    font-size: 38px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+    }
+
+.popup button{
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px 0;
+    background: #6fd649;
+    color: #faf4f4;
+    border: 0;
+    outline: none;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+
+}
+</style>
+<!--Payment Section End-->
+<!-- Appointment End -->
+
+</html>

@@ -14,7 +14,7 @@ from django.contrib import messages
 
 
 # def PAYMENT(request):
-#     return render(request, "appointment.html")
+#     return render(request, "payment.html")
 
 def USERBASE(request):
     return render(request, "userbase.html", context)

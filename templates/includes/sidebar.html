@@ -11,6 +11,9 @@
              <li>
                <a href="{% url 'admin_home' %}"><i class="fas fa-home"></i> <span>Dashboard</span></a>
             </li>
+
+
+
              <li class="submenu">
                <a href="#"><i class="fas fa-hospital"></i> <span> Specialization</span> <span class="menu-arrow"></span></a>
                <ul>
@@ -18,12 +21,26 @@
                   <li><a href="{% url 'manage_specilizations' %}">Manage</a></li>
                </ul>
             </li>
-            <li>
-               <a href="{% url 'viewdoctorlist' %}"><i class="fas fa-users"></i> <span>Doctor List</span></a>
+
+
+
+            <li class="submenu">
+               <a href="#"><i class="fas fa-users"></i> <span>Doctor</span><span class="menu-arrow"></a>
+                  <ul>
+                     <li><a href="{% url 'add_doctors' %}">Add</a></li>
+                     <li><a href="{% url 'viewdoctorlist' %}">Manage</a></li>
+                  </ul>
             </li>
+
+
+
+
             <li>
                <a href="{% url 'search_doctor' %}"><i class="fas fa-search"></i> <span>Search Doctor</span></a>
             </li>
+            {% comment %} <li>
+               <a href="{% url 'search_doctor' %}"><i class="fas fa-search"></i> <span>Search Patient</span></a>
+            </li> {% endcomment %}
             <li>
                {% comment %} <a href="{% url 'doctor_between_date_report' %}"><i class="fa fa-file"></i> <span>Doctor Reg Report</span></a> {% endcomment %}
             </li>

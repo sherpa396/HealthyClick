@@ -12,17 +12,24 @@ def ADMINHOME(request):
     context = {"doctor_count": doctor_count,"specialization_count": specialization_count,}
     return render(request, "admin/adminhome.html", context)
 
-
+#for specialization
 @login_required(login_url="/")
 def SPECIALIZATION(request):
     if request.method == "POST":
         specializationname = request.POST.get("specializationname")
-        specialization = Specialization(sname=specializationname,)
-        specialization.save()
-        messages.success(request, "Specialization  Added Succeesfully!!!")
-        return redirect("add_specilizations")
-    return render(request, "admin/specialization.html")
+        
+        # Check if the specialization already exists
+        if Specialization.objects.filter(sname=specializationname).exists():
+            messages.error(request, "Specialization already exists !")
+            return redirect("add_specilizations")  # Redirect back to the form
 
+        # If it doesn't exist, create and save the new specialization
+        specialization = Specialization(sname=specializationname)
+        specialization.save()
+        messages.success(request, "Specialization added successfully!")
+        return redirect("add_specilizations")
+
+    return render(request, "admin/specialization.html")
 
 @login_required(login_url="/")
 def MANAGESPECIALIZATION(request):
@@ -61,11 +68,69 @@ def UPDATE_SPECIALIZATION_DETAILS(request):
     return render(request, "admin/update_specialization.html")
 
 
+#for doctors
+@login_required(login_url="/")
+def DOCTOR(request):
+    if request.method == "POST":
+        doctorname = request.POST.get("doctorname")
+        
+        # Check if the doctor already exists
+        if Doctor.objects.filter(dname=doctorname).exists():
+            messages.error(request, "Doctor already exists !")
+            return redirect("add_doctors")  # Redirect back to the form
+
+        # If it doesn't exist, create and save the new specialization
+        doctor = Doctor(dname=doctorname)
+        doctor.save()
+        messages.success(request, "Doctor added successfully!")
+        return redirect("add_doctors")
+
+    return render(request, "admin/doctor.html")
+
+# @login_required(login_url="/")
+# def MANAGEDOCTOR(request):
+#     doctor = Doctor.objects.all()
+#     context = {"doctor": doctor,}
+#     return render(request, "admin/manage_doctor.html", context)
+
+
+# def DELETE_DOCTOR(request, id):
+#     doctor = Doctor.objectsdoctor.delete()
+#     messages.success(request, "Record Delete Succeesfully!!!")
+#     return redirect("manage_doctors")
+
+# login_required(login_url="/")
+
+
+def UPDATE_DOCTOR(request, id):
+    doctor = Doctor.objects.get(id=id)
+    context = {"doctor": doctor,}
+    return render(request, "admin/update_doctor.html", context)
+
+
+login_required(login_url="/")
+
+
+def UPDATE_DOCTOR_DETAILS(request):
+    if request.method == "POST":
+        sep_id = request.POST.get("sep_id")
+        dname = request.POST.get("dname")
+        doctor = Doctor.objects.get(id=sep_id)
+        doctor.dname = dname
+        doctor.save()
+        messages.success(request, "Your doctor detail has been updated successfully")
+        return redirect("manage_doctors")
+    return render(request, "admin/update_doctor.html")
+
+# #end doctor
+
+
+
 @login_required(login_url="/")
 def DoctorList(request):
     doctorlist = DoctorReg.objects.all()
     context = {"doctorlist": doctorlist,}
-    return render(request, "admin/doctor-list.html", context)
+    return render(request, "admin/doctor_list.html", context)
 
 
 def ViewDoctorDetails(request, id):

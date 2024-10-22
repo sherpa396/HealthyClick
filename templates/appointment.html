@@ -150,7 +150,7 @@
             {% csrf_token %}
             <div class="form-group">
                 <label for="patientName">Patient's Name</label>
-                <input type="text" id="patientName" name="patientName" required>
+                <input type="text" id="patientName" name="patientName" required="true">
             </div>
             <div class="form-group">
                 <label for="amount">Amount</label>
@@ -158,16 +158,16 @@
             </div>
             <div class="form-group">
                 <label for="cardNumber">Card Number</label>
-                <input type="text" id="cardNumber" name="cardNumber" maxlength="16" required>
+                <input type="text" id="cardNumber" name="cardNumber" maxlength="16" required="true">
             </div>
             <div class="form-group">
                 <label for="expiryDate">Expiry Date (MM/YY)</label>
-                <input type="text" id="expiryDate" name="expiryDate" required placeholder="MM/YY">
+                <input type="text" id="expiryDate" name="expiryDate" required="true" placeholder="MM/YY">
             </div>
 
             <div class="form-group">
                 <label for="cvv">CVV</label>
-                <input type="text" id="cvv" name="cvv" maxlength="3" required>
+                <input type="text" id="cvv" name="cvv" maxlength="3" required="true">
             </div>
             <br>
             {% comment %} <form method="POST" action="{% url 'appointment' %}"> {% endcomment %}

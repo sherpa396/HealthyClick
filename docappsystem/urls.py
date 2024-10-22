@@ -18,52 +18,34 @@ urlpatterns = [
     # path('pdf_download/', views.DownloadPDF.as_view(), name="pdf_download"),
     
     
-    # This is admin panel
+    # admin panel
     path("Admin/AdminHome", adminviews.ADMINHOME, name="admin_home"),
-    path("Admin/Specialization", adminviews.SPECIALIZATION, name="add_specilizations"),
-    path(
-        "Admin/ManageSpecialization",
-        adminviews.MANAGESPECIALIZATION,
-        name="manage_specilizations",
-    ),
-    path(
-        "Admin/DeleteSpecialization/<str:id>",
-        adminviews.DELETE_SPECIALIZATION,
-        name="delete_specilizations",
-    ),
-    path(
-        "UpdateSpecialization/<str:id>",
-        adminviews.UPDATE_SPECIALIZATION,
-        name="update_specilizations",
-    ),
-    path(
-        "UPDATE_Specialization_DETAILS",
-        adminviews.UPDATE_SPECIALIZATION_DETAILS,
-        name="update_specilizations_details",
-    ),
-    path("Admin/DoctorList", adminviews.DoctorList, name="viewdoctorlist"),
-    path(
-        "Admin/ViewDoctorDetails/<str:id>",
-        adminviews.ViewDoctorDetails,
-        name="viewdoctordetails",
-    ),
-    path(
-        "Admin/ViewDoctorAppointmentList/<str:id>",
-        adminviews.ViewDoctorAppointmentList,
-        name="viewdoctorappointmentlist",
-    ),
-    path(
-        "Admin/ViewPatientDetails/<str:id>",
-        adminviews.ViewPatientDetails,
-        name="viewpatientdetails",
-    ),
-    path("SearchDoctor", adminviews.Search_Doctor, name="search_doctor"),
-    # path(
-    #     "DoctorBetweenDateReport",
-    #     adminviews.Doctor_Between_Date_Report,
-    #     name="doctor_between_date_report",
-    # ),
     
+    # specialization management
+    path("Admin/Specialization", adminviews.SPECIALIZATION, name="add_specilizations"),
+    path("Admin/ManageSpecialization", adminviews.MANAGESPECIALIZATION, name="manage_specilizations",),
+    path("Admin/DeleteSpecialization/<str:id>", adminviews.DELETE_SPECIALIZATION, name="delete_specilizations",),
+    path("UpdateSpecialization/<str:id>", adminviews.UPDATE_SPECIALIZATION, name="update_specilizations",),
+    path("UPDATE_Specialization_DETAILS", adminviews.UPDATE_SPECIALIZATION_DETAILS, name="update_specilizations_details",),
+    
+    
+    # doctor management
+    path("Admin/DoctorList", adminviews.DoctorList, name="viewdoctorlist"),
+    path("Admin/ViewDoctorDetails/<str:id>", adminviews.ViewDoctorDetails, name="viewdoctordetails",),
+    path("Admin/ViewDoctorAppointmentList/<str:id>", adminviews.ViewDoctorAppointmentList, name="viewdoctorappointmentlist",),
+    path("Admin/ViewPatientDetails/<str:id>", adminviews.ViewPatientDetails, name="viewpatientdetails",),
+    
+    path("Admin/Doctor", adminviews.DOCTOR, name="add_doctors"),
+    # path("Admin/ManageDoctor", adminviews.MANAGEDOCTOR, name="manage_doctors",),
+    # path("Admin/DeleteDoctor/<str:id>", adminviews.DELETE_DOCTOR, name="delete_doctors",),
+    path("UpdateDoctor/<str:id>", adminviews.UPDATE_DOCTOR, name="update_doctors",),
+    # path("UPDATE_Doctor_DETAILS", adminviews.UPDATE_DOCTOR_DETAILS, name="update_doctors_details",),
+    
+    
+    
+    # searching registered doctor
+    path("SearchDoctor", adminviews.Search_Doctor, name="search_doctor"),
+   
     # Website Page
     path("Website/update", adminviews.WEBSITE_UPDATE, name="website_update"),
     path(

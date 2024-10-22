@@ -101,9 +101,6 @@ def View_Appointment(request):
     return render(request, "doc/view_appointment.html", context)
 
 
-
-
-
 def Patient_Appointment_Details(request, id):
     patientdetails = Appointment.objects.filter(id=id)
     context = {"patientdetails": patientdetails}

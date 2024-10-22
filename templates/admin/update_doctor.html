@@ -6,10 +6,10 @@
     <div class="page-header">
     <div class="row">
     <div class="col">
-    <h3 class="page-title">Update Specialization</h3>
+    <h3 class="page-title">Update Doctor</h3>
     <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="{% url 'admin_home' %}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Update Specialization</li>
+    <li class="breadcrumb-item active">Update Doctor</li>
     </ul>
     </div>
     </div>
@@ -19,7 +19,7 @@
     <div class="col-lg-12">
     <div class="card">
     <div class="card-header">
-    <h5 class="card-title">Update Specialization</h5>
+    <h5 class="card-title">Update Doctor</h5>
     </div>
     <div class="card-body">
         {% if messages %}
@@ -46,14 +46,14 @@
                        {% endif %}
                         {% endfor %}
                        {% endif %}
-                       <form method="POST" action="{% url 'update_specilizations_details' %}" enctype="multipart/form-data">
+                       <form method="POST" action="{% url 'update_doctors_details' %}" enctype="multipart/form-data">
                         {% csrf_token %}
    
     <div class="form-group row">
-    <label class="col-form-label col-md-4">Specialization Name</label>
+    <label class="col-form-label col-md-4">Doctor Name</label>
     <div class="col-md-10">
-        <input type="text" class="form-control" name="sname" value="{{specialization.sname}}">
-        <input type="hidden" name="sep_id" class="form-control" id="sep_id" value="{{specialization.id}}" required="true">
+        <input type="text" class="form-control" name="sname" value="{{doctor.sname}}">
+        <input type="hidden" name="sep_id" class="form-control" id="sep_id" value="{{doctor.id}}" required="true">
     </div>
     </div>
     
