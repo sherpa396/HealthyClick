@@ -493,6 +493,7 @@ button.bg-danger:hover {
 .btn-info {
 	background-color: #009efb;
 	border: 1px solid #009efb
+	
 }
 .btn-info:hover,
 .btn-info:focus,
