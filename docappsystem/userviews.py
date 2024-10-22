@@ -13,21 +13,21 @@ from django.contrib import messages
 #     return redirect('/')
 
 
-def PAYMENT(request):
-    return render(request, "appointment.html")
+# def PAYMENT(request):
+#     return render(request, "appointment.html")
 
 def USERBASE(request):
     return render(request, "userbase.html", context)
 
-def payment(request):
-    paymentview = payment.objects.all()
-    page = Page.objects.all()
-    if request.method == "POST":
-        payment = request.POST.GET("payment")
+# def PAYMENT(request):
+#     payment = PAYMENT.objects.all()
+#     payment = PAYMENT.objects.all()
+#     if request.method == "POST":
+#         payment = request.POST.GET("payment")
 
-        # Display a success message
-        messages.success(request, "Payment Successful !")
-        return redirect("appointment")
+#         # Display a success message
+#         messages.success(request, "Payment Successful !")
+#         return redirect("appointment")
             
             
 
@@ -87,14 +87,14 @@ def create_appointment(request):
             time_of_appointment=time_of_appointment,
             doctor_id=doc_instance,
             additional_msg=additional_msg,
-            # payment=payment,
-            
         )
 
         # Display a success message
         messages.success(request, "Your Appointment Request Has Been Sent. We Will Contact You Soon")
         return redirect("appointment")
-    
+
+# def Payment(request):
+#     return render(request, 'appointment.html')
     
         # paymentdetails = Payment.objects.create(
         #     patient_name = patient_name,

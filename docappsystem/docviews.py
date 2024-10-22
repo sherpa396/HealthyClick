@@ -82,7 +82,7 @@ def View_Appointment(request):
         view_appointment = Appointment.objects.filter(doctor_id=doctor_reg)
 
         # Pagination for all appointment
-        paginator = Paginator(view_appointment, 2)  # Show 5 appointments per page
+        paginator = Paginator(view_appointment, 5)  # Show 5 appointments per page
         page = request.GET.get("page")
         try:
             view_appointment = paginator.page(page)
@@ -99,6 +99,9 @@ def View_Appointment(request):
         context = {"error_message": str(e)}
 
     return render(request, "doc/view_appointment.html", context)
+
+
+
 
 
 def Patient_Appointment_Details(request, id):
@@ -202,39 +205,39 @@ def Patient_New_Appointment(request):
 
 
 
-# def Patient_List_Approved_Appointment(request):
-#     doctor_admin = request.user
-#     doctor_reg = DoctorReg.objects.get(admin=doctor_admin)
-#     patientdetails1 = Appointment.objects.filter(
-#         status="Approved", doctor_id=doctor_reg
-#     )
-#     context = {"patientdetails1": patientdetails1}
-#     return render(request, "doc/patient_list_app_appointment.html", context)
-
-
 def Patient_List_Approved_Appointment(request):
     doctor_admin = request.user
     doctor_reg = DoctorReg.objects.get(admin=doctor_admin)
-    patientdetails1 = Appointment.objects.filter(doctor_id=doctor_reg)
+    patientdetails1 = Appointment.objects.filter(
+        status="Approved", doctor_id=doctor_reg
+    )
+    context = {"patientdetails1": patientdetails1}
+    return render(request, "doc/patient_list_app_appointment.html", context)
 
-    # Add pagination for patient list
-    paginator = Paginator(patientdetails1, 5)  # Show 5 approved appointments per page
-    page = request.GET.get('page')
 
-    try:
-        patientdetails1_paginated = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, show the first page
-        patientdetails1_paginated = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range, show the last page
-        patientdetails1_paginated = paginator.page(paginator.num_pages)
+# def Patient_List_Approved_Appointment(request):
+#     doctor_admin = request.user
+#     doctor_reg = DoctorReg.objects.get(admin=doctor_admin)
+#     patientdetails1 = Appointment.objects.filter(doctor_id=doctor_reg)
 
-    context = {
-        'patientdetails1': patientdetails1_paginated,
-    }
+#     # Add pagination for patient list
+#     paginator = Paginator(patientdetails1, 10)  # Show 5 approved appointments per page
+#     page = request.GET.get('page')
+
+#     try:
+#         patientdetails1_paginated = paginator.page(page)
+#     except PageNotAnInteger:
+#         # If page is not an integer, show the first page
+#         patientdetails1_paginated = paginator.page(1)
+#     except EmptyPage:
+#         # If page is out of range, show the last page
+#         patientdetails1_paginated = paginator.page(paginator.num_pages)
+
+#     context = {
+#         'patientdetails1': patientdetails1_paginated,
+#     }
     
-    return render(request, 'doc/patient_list_app_appointment.html', context)
+#     return render(request, 'doc/patient_list_app_appointment.html', context)
 
 
 
@@ -275,8 +278,8 @@ def Patient_Appointment_Completed(request):
     doctor_reg = DoctorReg.objects.get(admin=doctor_admin)
     patientdetails1 = Appointment.objects.filter(doctor_id=doctor_reg)
 
-    # Add pagination for completed
-    paginator = Paginator(patientdetails1, 5)  # Show 5 completed appointments per page
+    # Add pagination for completed appointment
+    paginator = Paginator(patientdetails1, 20)  # Show 5 completed appointments per page
     page = request.GET.get('page')
 
     try:

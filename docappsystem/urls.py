@@ -10,7 +10,7 @@ urlpatterns = [
     path("login/", views.LOGIN, name="login"),
     path("doLogin", views.doLogin, name="doLogin"),
     path("doLogout", views.doLogout, name="logout"),
-    # path("payment", views.PAYMENT, name="payment"),
+    # path("payment/", userviews.PAYMENT, name="payment"),
     
     # pdf  print section
 	# path('', views.index),

@@ -86,13 +86,13 @@
 <!-- Pagination controls -->
 <div class="pagination" style="padding-top: 20px;padding-bottom: 20px;text-align: center;">
     <span class="step-links">
-        {% if view_appointment.has_previous %}
+        {% if Patient_List_Approved_Appointment.has_previous %}
             <a href="?page=1">&laquo; First</a>
-            <a href="?page={{ view_appointment.previous_page_number }}">Previous</a>
+            <a href="?page={{ Patient_List_Approved_Appointment.previous_page_number }}">Previous</a>
         {% endif %}
 
         <span class="current">
-            Page {{ view_appointment.number }} of {{ view_appointment.paginator.num_pages }}.
+            Page {{ Patient_List_Approved_Appointment.number }} of {{ Patient_List_Approved_Appointment.paginator.num_pages }}.
         </span>
 
         {% if view_appointment.has_next %}
