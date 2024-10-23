@@ -10,6 +10,8 @@ urlpatterns = [
     path("login/", views.LOGIN, name="login"),
     path("doLogin", views.doLogin, name="doLogin"),
     path("doLogout", views.doLogout, name="logout"),
+    # path("userappointment/", userviews.create_appointment, name="appointment"),
+
     # path("payment/", userviews.PAYMENT, name="payment"),
     
     # pdf  print section

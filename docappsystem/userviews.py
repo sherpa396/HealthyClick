@@ -5,7 +5,8 @@ from datetime import datetime
 from django.contrib import messages
 # from .utils import send_email_to_client
 # from .models import Payment
-
+from django.core.exceptions import ValidationError
+from datetime import datetime
 
 
 # def send_email(request):
@@ -19,15 +20,15 @@ from django.contrib import messages
 def USERBASE(request):
     return render(request, "userbase.html", context)
 
-# def PAYMENT(request):
-#     payment = PAYMENT.objects.all()
-#     payment = PAYMENT.objects.all()
-#     if request.method == "POST":
-#         payment = request.POST.GET("payment")
+def PAYMENT(request):
+    payment = PAYMENT.objects.all()
+    payment = PAYMENT.objects.all()
+    if request.method == "POST":
+        payment = request.POST.GET("payment")
 
-#         # Display a success message
-#         messages.success(request, "Payment Successful !")
-#         return redirect("appointment")
+        # Display a success message
+        messages.success(request, "Payment Successful !")
+        return redirect("appointment")
             
             
 
@@ -51,37 +52,51 @@ def create_appointment(request):
         fullname = request.POST.get("fullname")
         email = request.POST.get("email")
         mobilenumber = request.POST.get("mobilenumber")
+        address = request.POST.get("address")
+        age = request.POST.get("age")
+        gender = request.POST.get("gender")
+        appointmenttype = request.POST.get("appointmenttype")
         date_of_appointment = request.POST.get("date_of_appointment")
         time_of_appointment = request.POST.get("time_of_appointment")
         doctor_id = request.POST.get("doctor_id")
         additional_msg = request.POST.get("additional_msg")
         
+        # Check if email or mobile number is already in use
+        email_exists = Appointment.objects.filter(email=email).exists()
+        mobile_exists = Appointment.objects.filter(mobilenumber=mobilenumber).exists()
+
+        if email_exists:
+            messages.error(request, "This email is already registered.")
+        if mobile_exists:
+            messages.error(request, "This mobile number is already registered.")
         
+        # If there are error messages (for email or mobile), stop further processing
+        if email_exists or mobile_exists:
+            return redirect("appointment")
 
-        # Retrieve the DoctorReg instance using the doctor_id
-        doc_instance = DoctorReg.objects.get(id=doctor_id)
-
-        # Validate that date_of_appointment is greater than today's date
+        # Validate the date
         try:
             appointment_date = datetime.strptime(date_of_appointment, "%Y-%m-%d").date()
             today_date = datetime.now().date()
 
+            # Only show error if the selected date is in the past
             if appointment_date <= today_date:
-                # If the appointment date is not in the future, display an error message
-                messages.error(
-                    request, "Please select a date in the future for your appointment"
-                )
-                return redirect("appointment")  # Redirect back to the appointment page
+                messages.error(request, "Please select a date in the future for your appointment")
+                return redirect("appointment")
         except ValueError:
-            # Handle invalid date format error
             messages.error(request, "Invalid date format")
-            return redirect("appointment")  # Redirect back to the appointment page
+            return redirect("appointment")
 
-        # Create a new Appointment instance with the provided data
+        # If date is valid, create the new Appointment
+        doc_instance = DoctorReg.objects.get(id=doctor_id)
         appointmentdetails = Appointment.objects.create(
             appointmentnumber=appointmentnumber,
             fullname=fullname,
             email=email,
+            address=address,
+            age=age,
+            gender=gender,
+            appointmenttype=appointmenttype,
             mobilenumber=mobilenumber,
             date_of_appointment=date_of_appointment,
             time_of_appointment=time_of_appointment,
@@ -89,24 +104,27 @@ def create_appointment(request):
             additional_msg=additional_msg,
         )
 
-        # Display a success message
         messages.success(request, "Your Appointment Request Has Been Sent. We Will Contact You Soon")
         return redirect("appointment")
+
+
+
+
 
 # def Payment(request):
 #     return render(request, 'appointment.html')
     
-        # paymentdetails = Payment.objects.create(
-        #     patient_name = patient_name,
-        #     amount =amount,
-        #     cardnumber =cardnumber,
-        #     expirydate =expirydate,
-        #     cvv =cvv,
-        # )
+#         paymentdetails = Payment.objects.create(
+#             patient_name = patient_name,
+#             amount =amount,
+#             cardnumber =cardnumber,
+#             expirydate =expirydate,
+#             cvv =cvv,
+#         )
 
-        # # Display a success message
-        # # message.success(request, "Payment Successful !!")
-        # return redirect("appointment")
+#         # Display a success message
+#         # message.success(request, "Payment Successful !!")
+#         return redirect("appointment")
 
     context = {"doctorview": doctorview, "page": page}
     return render(request, "appointment.html", context)

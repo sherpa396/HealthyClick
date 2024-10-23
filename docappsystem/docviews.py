@@ -85,7 +85,7 @@ def View_Appointment(request):
         view_appointment = Appointment.objects.filter(doctor_id=doctor_reg)
 
         # Pagination for all appointment
-        paginator = Paginator(view_appointment, 5)  # Show 5 appointments per page
+        paginator = Paginator(view_appointment, 20)  # Show 5 appointments per page
         page = request.GET.get("page")
         try:
             view_appointment = paginator.page(page)
@@ -142,7 +142,7 @@ def Patient_Approved_Appointment(request):
     patientdetails1 = Appointment.objects.filter(doctor_id=doctor_reg)
 
     # Add pagination approved patients
-    paginator = Paginator(patientdetails1, 5)  # Show 5 appointments per page
+    paginator = Paginator(patientdetails1, 20)  # Show 5 appointments per page
     page = request.GET.get('page')
     
     try:
@@ -185,7 +185,7 @@ def Patient_New_Appointment(request):
     patientdetails1 = Appointment.objects.filter(status="0", doctor_id=doctor_reg)
 
     # Add pagination new appointment
-    paginator = Paginator(patientdetails1, 5)  # Show 5 appointments per page
+    paginator = Paginator(patientdetails1, 20)  # Show 5 appointments per page
     page = request.GET.get('page')
 
     try:

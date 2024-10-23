@@ -56,28 +56,26 @@
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="bg-light rounded h-100 d-flex align-items-center p-5">
                     <form method="POST" action="{% url 'appointment' %}">
+                        {% comment %} {% if messages %}
+                        {% for message in messages %}
+                         
+                       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                      {{message}}
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                         </button>
+                          </div>
+                       
+                        {% endfor %}
+                       {% endif %} {% endcomment %}
                         {% if messages %}
                         {% for message in messages %}
-                         {% if message.tags == 'error' %}
                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
                       {{message}}
                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                          </button>
                           </div>
-                       {% endif %}
-                        {% endfor %}
-                       {% endif %}
-                           {% if messages %}
-                        {% for message in messages %}
-                         {% if message.tags == 'success' %}
-                       <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                      {{message}}
-                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                     <span aria-hidden="true">&times;</span>
-                         </button>
-                          </div>
-                       {% endif %}
                         {% endfor %}
                        {% endif %}
                         {% csrf_token %}
@@ -95,6 +93,30 @@
                             <div class="col-12 col-sm-6">
                                 <input type="text" class="form-control border-0" placeholder="Contact Number" style="height: 55px;" name="mobilenumber" maxlength="10" required="true">
                             </div>
+                            <div class="col-12 col-sm-6">
+                                <input type="text" class="form-control border-0" placeholder="Address" style="height: 55px;" name="address" maxlength="20" required="true">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <input type="number" class="form-control border-0" placeholder="Age" style="height: 55px;" name="age" maxlength="2" required="true">
+                            </div>
+                            
+                            <div class="col-12 col-sm-6">
+                                <select class="form-select border-0" style="height: 55px;" name="gender" required="true">
+                                    <option value="" disabled selected>Select Gender</option> <!-- Placeholder option -->
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12 col-sm-6">
+                                <select class="form-select border-0" style="height: 55px;" name="appointmenttype" required="true">
+                                    <option value="" disabled selected>Appointment type</option> <!-- Placeholder option -->
+                                    <option value="General">General</option>
+                                    <option value="Emergency">Emergency</option>
+                                </select>
+                            </div>
+                            
                             <div class="col-12 col-sm-6">
                                 <select class="form-select border-0" style="height: 55px;" name="doctor_id" required="true">
                                     <option selected>Choose Doctor</option>
@@ -116,9 +138,11 @@
                             <div class="col-12 col-sm-6">
                                 <div class="time" id="time" data-target-input="nearest"></div>
                                     <input type="time" class="form-control border-0" placeholder="Choose Time" data-target="#time"
-                                    data-toggle="datetimepicker" style="height: 55px;" name="time_of_appointment" step="600" required="true">
+                                    data-toggle="datetimepicker" style="height: 55px;" name="time_of_appointment" required="true">
                                 </div>
                             </div>
+                            
+
                             
                             <div class="col-12" style="padding-top: 20px;">
                                 <textarea class="form-control border-0" rows="5" placeholder="Describe your symptoms" name="additional_msg"></textarea>
@@ -170,7 +194,6 @@
                 <input type="text" id="cvv" name="cvv" maxlength="3" required="true">
             </div>
             <br>
-            {% comment %} <form method="POST" action="{% url 'appointment' %}"> {% endcomment %}
 
             <button class="btn-btn" type="submit" value="POST" > Pay Now </button>
         </form>
@@ -325,5 +348,10 @@ transform: translate(-50%,-50%) scale(1);
 </style>
 <!--Payment Section End-->
 <!-- Appointment End -->
-
+<script>
+    // Automatically fade out alerts after 5 seconds
+    setTimeout(function() {
+        $('.alert').fadeOut('slow');
+    }, 5000); // 5000 milliseconds = 5 seconds
+</script>
 {% endblock %}
