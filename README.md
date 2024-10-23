@@ -73,7 +73,7 @@
  
 
 ## Drawbacks/LoopHoles
-* An initial admin account is needed for approving all other accounts.
+* An initial admin should be created using django create super user.
 
 
 

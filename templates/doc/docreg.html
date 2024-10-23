@@ -26,41 +26,15 @@
                 <p class="account-subtitle">Access to Doctor's dashboard</p>
                 <form action="" method="POST" enctype="multipart/form-data">
                   {% if messages %}
-                  {% for message in messages %} {% if message.tags == 'error' %}
-                  <div
-                    class="alert alert-warning alert-dismissible fade show"
-                    role="alert"
-                  >
-                    {{message}}
-                    <button
-                      type="button"
-                      class="close"
-                      data-dismiss="alert"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  {% endif %}
-                  {% endfor %}
-                  {% endif %}
-                  {% if messages %}
-                  {% for message in messages %} 
-                  {% if message.tags == 'success' %}
-                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    {{message}}
-                    <button
-                      type="button"
-                      class="close"
-                      data-dismiss="alert"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  {% endif %}
-                  {% endfor %}
-                  {% endif %}
+  {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" {% if message.tags == 'success' %}class="alert-success"{% endif %}>
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {% endfor %}
+{% endif %}
                   {% csrf_token %}
                   <div class="form-group">
                     <label>Profile Picture</label>
@@ -149,7 +123,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <button class="btn btn-primary btn-block" type="submit">
+                    <button class="btn btn-primary btn-block" type="submit" value="Sign Up">
                       Register
                     </button>
                   </div>
@@ -159,7 +133,8 @@
                   <button class="btn btn-info">
                   <a href="{% url 'login' %}">Login</a>
                   </button>
-                </div>
+                </div><br>
+                <div class="btn btn-danger btn-block"><a href="{% url 'index' %}">Home Page</a></div>
               </div>
             </div>
           </div>

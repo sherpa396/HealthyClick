@@ -19,11 +19,14 @@ def DOCSIGNUP(request):
         password = request.POST.get("password")
 
         if CustomUser.objects.filter(email=email).exists():
-            messages.warning(request, "Email already exist")
+            messages.warning(request, "Email already exist !!")
             return redirect("docsignup")
         if CustomUser.objects.filter(username=username).exists():
-            messages.warning(request, "Username already exist")
+            messages.warning(request, "Username already exist !!")
             return redirect("docsignup")
+        # if CustomUser.objects.filter(mobno=mobno).exists():
+        #     messages.warning(request, "Mobile number already exist")
+        #     return redirect("docsignup")
         else:
             user = CustomUser(
                 first_name=first_name,
@@ -42,7 +45,7 @@ def DOCSIGNUP(request):
                 specialization_id=spid,
             )
             doctor.save()
-            messages.success(request, "Signup Successfully")
+            messages.success(request, "Signup Successfull !!")
             return redirect("docsignup")
 
     context = {"specialization": specialization}
@@ -60,10 +63,10 @@ def DOCTORHOME(request):
         status="Approved", doctor_id=doctor_reg
     ).count
     canaptcount = Appointment.objects.filter(
-        status="Cancelled", doctor_id=doctor_reg
+        status="Cancelled", doctor_id=doctor_reg #canaptcount = cancelled appointment count
     ).count
     comaptcount = Appointment.objects.filter(
-        status="Completed", doctor_id=doctor_reg
+        status="Completed", doctor_id=doctor_reg # comaptcount = completed appointment count
     ).count
     context = {
         "newaptcount": newaptcount,
