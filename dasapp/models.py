@@ -41,7 +41,7 @@ class Appointment(models.Model):
     mobilenumber = models.CharField(max_length=11)
     email = models.EmailField(max_length=100)
     address = models.CharField(max_length=200)
-    age = models.IntegerField(max_length=2, default=0)
+    age = models.IntegerField(default=0)
     gender = models.CharField(max_length=100)
     appointmenttype = models.CharField(max_length=100)
     date_of_appointment = models.CharField(max_length=250)
@@ -73,10 +73,12 @@ class Page(models.Model):
     
 class Payment(models.Model):
     patient_name = models.CharField(max_length=250)
-    amount = models.IntegerField()
-    cardnumbers = models.BigIntegerField(blank=True, default=0)
-    expirydate = models.CharField(max_length=10)
-    cvv = models.IntegerField()
+    amount = models.IntegerField(default=0)
+    # cardnumbers = models.BigIntegerField(blank=True)
+    # cardnumbers = models.CharField(max_length=255, null=True)
+    cardnumbers = models.CharField(max_length=255, null=True)
+    expirydate = models.CharField(max_length=10, null=True)
+    cvv = models.IntegerField(default=0)
 
     def __str__(self):
         return self.patient_name

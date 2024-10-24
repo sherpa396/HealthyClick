@@ -84,23 +84,52 @@
     </table>
     
 <!-- Pagination controls -->
-<div class="pagination" style="padding-top: 20px;padding-bottom: 20px;text-align: center;">
-    <span class="step-links">
-        {% if Patient_List_Approved_Appointment.has_previous %}
-            <a href="?page=1">&laquo; First</a>
-            <a href="?page={{ Patient_List_Approved_Appointment.previous_page_number }}">Previous</a>
-        {% endif %}
+<div class="pagination" style="padding-top: 20px; padding-bottom: 20px; text-align: center;">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <!-- Previous Button -->
+            {% if patientdetails1.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ patientdetails1.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo; Previous</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Previous</span>
+            </li>
+            {% endif %}
 
-        <span class="current">
-            Page {{ Patient_List_Approved_Appointment.number }} of {{ Patient_List_Approved_Appointment.paginator.num_pages }}.
-        </span>
+            <!-- Page Number Links -->
+            {% for page_num in patientdetails1.paginator.page_range %}
+                {% if patientdetails1.number == page_num %}
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">{{ page_num }}</span>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
 
-        {% if view_appointment.has_next %}
-        <a href="?page={{ view_appointment.next_page_number }}">Next</a>
-        <a href="?page={{ view_appointment.paginator.num_pages }}">Last &raquo;</a>
-        {% endif %}
-    </span>
+            <!-- Next Button -->
+            {% if patientdetails1.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ patientdetails1.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">Next &raquo;</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Next</span>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
 </div>
+
+<!--End of pagination -->
     </div>
     </div>
     </div>

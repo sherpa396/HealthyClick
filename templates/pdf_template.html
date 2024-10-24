@@ -1,64 +1,106 @@
-<html>
-	<title>Invoice Card</title>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<style>
-	.container {
-		text-align: center;
-        color: black;
-        font-size: 25px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-	.details{
-		font-size: 14px;
-	}
+        .main-container {
+            max-width: 900px;
+            margin: 0 auto;
+			height: 700px;
+            background-color: #ffffff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 6px;
+            background-color: #fff;
+        }
 
-	.bill{
-		text-align: left;
-        color: black;
-        font-size: 16px;
-	}
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 40px;
+            border-radius: 8px 8px 0 0;
+        }
 
-	table {
-		border-collapse: collapse;
-		border: 1px solid black;
-		font-size: 25px;
-	}
-	
-	th, td {
-		border: 1px solid gray;
-	}
-	
-</style>
+        .details {
+            padding: 20px;
+            font-size: 1.1em;
+        }
+
+        .details h1 {
+            margin-top: 0;
+            font-size: 1.8em;
+            color: #333;
+        }
+
+        .details p {
+            margin: 0;
+            font-size: 1.1em;
+        }
+
+        hr {
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+
+        .bill {
+            padding: 20px;
+            font-size: 1.2em;
+        }
+
+        .bill p {
+            margin: 5px 0;
+        }
+
+        .bill span {
+            font-weight: bold;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+            }
+
+            .main-container {
+                box-shadow: none;
+            }
+        }
+    </style>
 </head>
-
 <body>
-    <div class="container">
-		HealthyClick - Doctor Appointment System
-		<br>
-		Boudha, Kathmandu, Nepal
-		<br>
-	</div>
-	<div class="details">
-		{% comment %} Name:{{website}}<br> {% endcomment %}
-		Address: {{address}}<br>
-		Phone: {{phone}}<br>
-		Email: {{email}}<br>
-	</div>
-
-	<hr>
-
-	<center class="details">
-		<h1>Prescription & Invoice</h1>
-	</center>
+    <div class="main-container">
+        <div class="container">
+            HealthyClick <br> A web based Doctor Appointment System
+            <br>
+        </div>
+        <div class="details">
+            <p>Website:{{website}}</p>
+            <p>Address:{{address}}</p>
+            <p>Phone:{{phone}}</p>
+            <p>Email:{{email}}</p>
+        </div>
+        <hr>
+            <center><h1>Prescription & Invoice</h1></center>
+        <hr>
+		{% for i in invoice_details %}
+        <div class="bill">
+            <p>Doctor Remarks: {{i.remark}}</p>
+            <p>Prescribed Medicine: {{i.prescription}}</p>
+            <p>Recommended Test: {{i.recommendedtest}}</p>
+            <p>Total Doctor Fee: Nrs.200</p>
+            <p>Doctor's Name:{{i.fullname}}</p>
+        </div>
+		{% endfor %}
     </div>
-<hr>
-<div class="bill">
-		Doctor Remarks : {{remark}}<br>
-		Prescribed Medicine : {{prescription}}<br>
-		Recommended Test :{{recommendedtest}}<br>
-		Total Doctor Fee:  Nrs.200 <br>
-		Doctor's Name:{{doctor_name}}
-</div>
-
 </body>
 </html>

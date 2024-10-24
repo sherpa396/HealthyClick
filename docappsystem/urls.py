@@ -10,14 +10,12 @@ urlpatterns = [
     path("login/", views.LOGIN, name="login"),
     path("doLogin", views.doLogin, name="doLogin"),
     path("doLogout", views.doLogout, name="logout"),
-    # path("userappointment/", userviews.create_appointment, name="appointment"),
+    path("userappointment/", userviews.create_appointment, name="appointment"),
 
     path("payment/", userviews.PAYMENT, name="payment"),
     
     # pdf  print section
-	# path('', views.index),
     path('pdf_view/', views.ViewPDF.as_view(), name="pdf_view"),
-    # path('pdf_download/', views.DownloadPDF.as_view(), name="pdf_download"),
     
     
     # admin panel
@@ -123,7 +121,7 @@ urlpatterns = [
         name="viewappointmentdetails",
     ),
     
-    path("ViewInvoice", userviews.invoice_view,  name="ViewInvoice"),
+    path("ViewInvoice", views.invoice_view,  name="ViewInvoice"),
 
     # profile path
     path("Profile", views.PROFILE, name="profile"),

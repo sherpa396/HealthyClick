@@ -3,7 +3,7 @@ from dasapp.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import logout, login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from dasapp.models import CustomUser
+from dasapp.models import *
 from django.contrib.auth import get_user_model
 from io import BytesIO
 from django.http import HttpResponse
@@ -124,17 +124,6 @@ def CHANGE_PASSWORD(request):
     return render(request, "change-password.html")
 
 
-
-# def check_availability(request):
-#     date = request.GET.get('date')
-#     time_slot = request.GET.get('time_slot')
-    
-#     if Appointment.objects.filter(date=date, time_slot=time_slot).exists():
-#         return JsonResponse({'available': False})
-    
-#     return JsonResponse({'available': True})
-
-
 def render_to_pdf(template_src, context_dict={}):
 	template = get_template(template_src)
 	html  = template.render(context_dict)
@@ -144,20 +133,48 @@ def render_to_pdf(template_src, context_dict={}):
 		return HttpResponse(result.getvalue(), content_type='application/pdf')
 	return None
 
-
 data = [{
-	# "website": "HealthyClick - A web based doctor appointment system",
+	"website": "www.HealthyClick.pythonanywhere",
 	"address": "Bouddha - 06, Kathmandu, Nepal",
 	"phone": "+977-9841123463",
 	"email": "healthyclickinfo@email.com",
 	}]
 
+
 #Opens up page as PDF
 class ViewPDF(View):
 	def get(self, request, *args, **kwargs):
-          return render(request, 'pdf_template.html', {'xyz':data})
+            return render(request, 'pdf_template.html')
 		# pdf = render_to_pdf('pdf_template.html', data)
 		# return HttpResponse(pdf, content_type='application/pdf')
+
+# def invoice_view(request, id):
+#     # Fetch patient details based on the provided patient_id
+#     patient_details = patient_details.objects.get(id=id)
+    
+#     context = {
+#         'doctor_remarks': patient_details.remark,
+#         'prescribed_medicine': patient_details.prescription,
+#         'recommended_test': patient_details.recommendedtest,
+#         'doctor_name': patient_details.fullname,
+#     }
+    
+#     return render(request, 'pdf_template.html', context)
+
+
+def invoice_view(request):
+    page = Page.objects.all()
+    patientdetails = Appointment.objects.filter(id=id)
+    context = {"patientdetails": patientdetails, "page": page}
+    
+    context = {
+        'doctor_remarks': invoice_view.remark,
+        'prescribed_medicine': invoice_view.prescription,
+        'recommended_test': invoice_view.recommendedtest,
+        'doctor_name': invoice_view.fullname,
+    }
+
+    return render(request, "pdf_template.html", context)
 
 
 def index(request):

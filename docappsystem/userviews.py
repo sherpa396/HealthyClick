@@ -21,23 +21,27 @@ def USERBASE(request):
     return render(request, "userbase.html", context)
 
 def PAYMENT(request):
-    # payment = PAYMENT.objects.all()
-    # payment = PAYMENT.objects.all()
-
     if request.method == "POST":
-        patient_name = request.POST.get('patientName')
-        print(patient_name)
-        # Display a success message
-
-        to_db = Payment(
-            patient_name=patient_name,
-        )
-        to_db.save()
-        messages.success(request, "Payment Successful !")
+        patient_name = request.POST.get('patientname')
+        amount = request.POST.get('amount')
+        cardnumbers = request.POST.get('cardnumbers')
+        expirydate = request.POST.get('expirydate')
+        cvv = request.POST.get('cvv')
+    
+    # Save data to db and display a success message
+        payment_details = Payment(
+                patient_name=patient_name,
+                amount=amount,
+                cardnumbers=cardnumbers,
+                expirydate=expirydate,
+                cvv=cvv,
+            )
+        payment_details.save()
+        
+        messages.success(request, "Payment Successful !!")
         return redirect("appointment")
-            
-            
 
+        
 def Index(request):
     doctorview = DoctorReg.objects.all()
     page = Page.objects.all()
@@ -112,25 +116,6 @@ def create_appointment(request):
 
         messages.success(request, "Your Appointment Request Has Been Sent. We Will Contact You Soon")
         return redirect("appointment")
-
-
-
-
-
-# def Payment(request):
-#     return render(request, 'appointment.html')
-    
-#         paymentdetails = Payment.objects.create(
-#             patient_name = patient_name,
-#             amount =amount,
-#             cardnumber =cardnumber,
-#             expirydate =expirydate,
-#             cvv =cvv,
-#         )
-
-#         # Display a success message
-#         # message.success(request, "Payment Successful !!")
-#         return redirect("appointment")
 
     context = {"doctorview": doctorview, "page": page}
     return render(request, "appointment.html", context)
