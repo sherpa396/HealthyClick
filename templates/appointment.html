@@ -170,7 +170,7 @@
         {% comment %} <img src="tick.png"> {% endcomment %}
        <img src="{% static 'assets/img/tick.png'%}">
         <h2> Doctor's Consultation Fee </h2>
-        <form  action="{% url 'appointment' %}" method="POST">
+        <form  action="{% url 'payment' %}" method="POST">
             {% csrf_token %}
             <div class="form-group">
                 <label for="patientName">Patient's Name</label>

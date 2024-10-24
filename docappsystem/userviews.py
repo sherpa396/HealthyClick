@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
-from dasapp.models import DoctorReg, Specialization, CustomUser, Appointment, Page
+from dasapp.models import *
 import random
 from datetime import datetime
 from django.contrib import messages
@@ -21,12 +21,18 @@ def USERBASE(request):
     return render(request, "userbase.html", context)
 
 def PAYMENT(request):
-    payment = PAYMENT.objects.all()
-    payment = PAYMENT.objects.all()
-    if request.method == "POST":
-        payment = request.POST.GET("payment")
+    # payment = PAYMENT.objects.all()
+    # payment = PAYMENT.objects.all()
 
+    if request.method == "POST":
+        patient_name = request.POST.get('patientName')
+        print(patient_name)
         # Display a success message
+
+        to_db = Payment(
+            patient_name=patient_name,
+        )
+        to_db.save()
         messages.success(request, "Payment Successful !")
         return redirect("appointment")
             

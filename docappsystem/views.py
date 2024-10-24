@@ -145,19 +145,19 @@ def render_to_pdf(template_src, context_dict={}):
 	return None
 
 
-data = {
+data = [{
 	# "website": "HealthyClick - A web based doctor appointment system",
 	"address": "Bouddha - 06, Kathmandu, Nepal",
 	"phone": "+977-9841123463",
 	"email": "healthyclickinfo@email.com",
-	}
+	}]
 
 #Opens up page as PDF
 class ViewPDF(View):
 	def get(self, request, *args, **kwargs):
-
-		pdf = render_to_pdf('pdf_template.html', data)
-		return HttpResponse(pdf, content_type='application/pdf')
+          return render(request, 'pdf_template.html', {'xyz':data})
+		# pdf = render_to_pdf('pdf_template.html', data)
+		# return HttpResponse(pdf, content_type='application/pdf')
 
 
 def index(request):

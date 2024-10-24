@@ -74,8 +74,8 @@ class Page(models.Model):
 class Payment(models.Model):
     patient_name = models.CharField(max_length=250)
     amount = models.IntegerField()
-    cardnumbers = models.TextField(blank=True, default=0)
-    expirydate = models.IntegerField()
+    cardnumbers = models.BigIntegerField(blank=True, default=0)
+    expirydate = models.CharField(max_length=10)
     cvv = models.IntegerField()
 
     def __str__(self):
