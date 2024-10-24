@@ -145,7 +145,7 @@
 
                             
                             <div class="col-12" style="padding-top: 20px;">
-                                <textarea class="form-control border-0" rows="5" placeholder="Describe your symptoms" name="additional_msg"></textarea>
+                                <textarea class="form-control border-0" rows="5" placeholder="Describe your symptoms" name="additional_msg" required="True"></textarea>
                             </div>
 
                             <div class="col-12" style="padding-top: 20px;">
@@ -168,9 +168,9 @@
 <div class="container-p">
     <div class="popup" id="popup">
         {% comment %} <img src="tick.png"> {% endcomment %}
-       <img src="{% static 'assets/img/tick.png'%}">
-        <h2> Doctor's Consultation Fee </h2>
-        <form  action="{% url 'payment' %}" method="POST">
+        <img src="{% static 'assets/img/tick.png'%}">
+        <h2>Doctor's Consultation Fee</h2>
+        <form action="{% url 'payment' %}" method="POST" onsubmit="return validateForm()">
             {% csrf_token %}
             <div class="form-group">
                 <label for="patientName">Patient's Name</label>
@@ -182,35 +182,45 @@
             </div>
             <div class="form-group">
                 <label for="cardNumber">Card Number</label>
-                <input type="text" id="cardnumber" name="cardnumber" maxlength="16" required="true">
+                <input type="text" id="cardnumbers" name="cardnumber" maxlength="16" required="true" 
+                pattern="\d{16}" placeholder="Enter 16-digit card number">
             </div>
             <div class="form-group">
                 <label for="expiryDate">Expiry Date (MM/YY)</label>
                 <input type="text" id="expirydate" name="expirydate" required="true" placeholder="MM/YY">
             </div>
-
             <div class="form-group">
                 <label for="cvv">CVV</label>
                 <input type="text" id="cvv" name="cvv" maxlength="3" required="true">
             </div>
             <br>
-
-            <button class="btn-btn" type="submit" value="POST" > Pay Now </button>
+            <button class="btn-btn" type="submit" value="POST">Pay Now</button>
         </form>
-</div>
+    </div>
 </div>
 
 <script>
-    
+    function validateForm() {
+        let cardNumber = document.getElementById('cardnumbers').value;
+
+        // Check if the card number is exactly 16 digits
+        if (cardNumber.length !== 16 || isNaN(cardNumber)) {
+            alert("Please enter a valid 16-digit card number.");
+            return false; // Prevent form submission
+        }
+        return true;
+    }
+
     let popup = document.getElementById("popup");
-    function openPopup(){
+    function openPopup() {
         popup.classList.add("open-popup");
     }
-    function closePopup(){
+    function closePopup() {
         popup.classList.remove("open-popup");
     }
-    </script>
+</script>
 
+<!--end payment-->
 
 <style>
 

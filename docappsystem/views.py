@@ -148,18 +148,18 @@ class ViewPDF(View):
 		# pdf = render_to_pdf('pdf_template.html', data)
 		# return HttpResponse(pdf, content_type='application/pdf')
 
-# def invoice_view(request, id):
-#     # Fetch patient details based on the provided patient_id
-#     patient_details = patient_details.objects.get(id=id)
+def invoice_view(request, id):
+    # Fetch patient details based on the provided patient_id
+    patient_details = patient_details.objects.get(id=id)
     
-#     context = {
-#         'doctor_remarks': patient_details.remark,
-#         'prescribed_medicine': patient_details.prescription,
-#         'recommended_test': patient_details.recommendedtest,
-#         'doctor_name': patient_details.fullname,
-#     }
+    context = {
+        'doctor_remarks': patient_details.remark,
+        'prescribed_medicine': patient_details.prescription,
+        'recommended_test': patient_details.recommendedtest,
+        'doctor_name': patient_details.fullname,
+    }
     
-#     return render(request, 'pdf_template.html', context)
+    return render(request, 'pdf_template.html', context)
 
 
 def invoice_view(request):
