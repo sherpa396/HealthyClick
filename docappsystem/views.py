@@ -21,21 +21,15 @@ from xhtml2pdf import pisa
 
 User = get_user_model()
 
-
 def BASE(request):
     return render(request, "base.html")
-
 
 def LOGIN(request):
     return render(request, "login.html")
 
-
-
-
 def doLogout(request):
     logout(request)
     return redirect("login")
-
 
 def doLogin(request):
     if request.method == "POST":
@@ -61,9 +55,7 @@ def doLogin(request):
         messages.error(request, "Email or Password is not valid")
         return redirect("login")
 
-
 login_required(login_url="/")
-
 
 def PROFILE(request):
     user = CustomUser.objects.get(id=request.user.id)
@@ -133,12 +125,6 @@ def render_to_pdf(template_src, context_dict={}):
 		return HttpResponse(result.getvalue(), content_type='application/pdf')
 	return None
 
-# data = {
-# 	"website": "www.HealthyClick.pythonanywhere.com",
-# 	"address": "Bouddha - 06, Kathmandu, Nepal",
-# 	"phone": "+977-9841123463",
-# 	"email": "healthyclickinfo@email.com",
-# 	}
 
 #Opens up page as PDF
 class ViewPDF(View):
