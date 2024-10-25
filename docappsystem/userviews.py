@@ -13,9 +13,11 @@ def PAYMENT(request):
     if request.method == "POST":
         patient_name = request.POST.get('patientname')
         amount = request.POST.get('amount')
-        cardnumbers = request.POST.get('cardnumbers')
+        cardnumbers = request.POST.get('cardnumber')
         expirydate = request.POST.get('expirydate')
         cvv = request.POST.get('cvv')
+
+        print('Patient Name: ', patient_name, '\nAmount: ', amount, '\nCard Numbers: ', cardnumbers, '\nExpiry Date: ', expirydate, '\nCVV: ', cvv)
     
     # Save data to db and display a success message
         payment_details = Payment(
@@ -184,7 +186,6 @@ def book_appointment(doctor_id, appointment_date, appointment_time):
     return None  # No conflict
 
 
-
 def User_Search_Appointments(request):
     page = Page.objects.all()
     
@@ -208,7 +209,8 @@ def View_Appointment_Details(request,id):
     page = Page.objects.all()
     patientdetails=Appointment.objects.filter(id=id)
     context={'patientdetails':patientdetails,
-    'page': page
+    'page': page,
+    'id': id,
 
     }
 

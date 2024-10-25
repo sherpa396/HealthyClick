@@ -15,7 +15,7 @@ urlpatterns = [
     path("payment/", userviews.PAYMENT, name="payment"),
     
     # pdf  print section
-    path('pdf_view/', views.ViewPDF.as_view(), name="pdf_view"),
+    path('pdf_view/<int:id>/', views.invoice_view, name="pdf_view"),
     
     
     # admin panel

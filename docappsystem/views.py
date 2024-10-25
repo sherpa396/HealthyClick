@@ -133,48 +133,52 @@ def render_to_pdf(template_src, context_dict={}):
 		return HttpResponse(result.getvalue(), content_type='application/pdf')
 	return None
 
-data = [{
+data = {
 	"website": "www.HealthyClick.pythonanywhere",
 	"address": "Bouddha - 06, Kathmandu, Nepal",
 	"phone": "+977-9841123463",
 	"email": "healthyclickinfo@email.com",
-	}]
+	}
 
 
 #Opens up page as PDF
 class ViewPDF(View):
 	def get(self, request, *args, **kwargs):
-            return render(request, 'pdf_template.html')
+            return render(request, 'pdf_template.html', {'xyz': data})
 		# pdf = render_to_pdf('pdf_template.html', data)
 		# return HttpResponse(pdf, content_type='application/pdf')
 
 def invoice_view(request, id):
     # Fetch patient details based on the provided patient_id
-    patient_details = patient_details.objects.get(id=id)
-    
+    patient_details = Appointment.objects.get(id=id)
     context = {
         'doctor_remarks': patient_details.remark,
         'prescribed_medicine': patient_details.prescription,
         'recommended_test': patient_details.recommendedtest,
         'doctor_name': patient_details.fullname,
+
+        "website": "www.HealthyClick.pythonanywhere",
+        "address": "Bouddha - 06, Kathmandu, Nepal",
+        "phone": "+977-9841123463",
+        "email": "healthyclickinfo@email.com",
     }
     
-    return render(request, 'pdf_template.html', context)
+    return render(request, 'pdf_template.html', {'context': context})
 
 
-def invoice_view(request):
-    page = Page.objects.all()
-    patientdetails = Appointment.objects.filter(id=id)
-    context = {"patientdetails": patientdetails, "page": page}
+# def invoice_view(request):
+#     page = Page.objects.all()
+#     patientdetails = Appointment.objects.filter(id=id)
+#     context = {"patientdetails": patientdetails, "page": page}
     
-    context = {
-        'doctor_remarks': invoice_view.remark,
-        'prescribed_medicine': invoice_view.prescription,
-        'recommended_test': invoice_view.recommendedtest,
-        'doctor_name': invoice_view.fullname,
-    }
+#     context = {
+#         'doctor_remarks': invoice_view.remark,
+#         'prescribed_medicine': invoice_view.prescription,
+#         'recommended_test': invoice_view.recommendedtest,
+#         'doctor_name': invoice_view.fullname,
+#     }
 
-    return render(request, "pdf_template.html", context)
+#     return render(request, "pdf_template.html", context)
 
 
 def index(request):
