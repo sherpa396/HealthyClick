@@ -8,7 +8,6 @@ class CustomUser(AbstractUser):
         (2, "doc"),
     }
     user_type = models.CharField(choices=USER, max_length=50, default=1)
-
     profile_pic = models.ImageField(upload_to="profile_pics/", blank=True, null=True)
 
 
@@ -37,6 +36,7 @@ class DoctorReg(models.Model):
 
 class Appointment(models.Model):
     appointmentnumber = models.IntegerField(default=0)
+    # doctor_id = models.ForeignKey(DoctorReg, on_delete=models.CASCADE)
     fullname = models.CharField(max_length=250)
     mobilenumber = models.CharField(max_length=11)
     email = models.EmailField(max_length=100)
@@ -75,11 +75,7 @@ class Payment(models.Model):
     patient_name = models.CharField(max_length=250)
     amount = models.IntegerField(default=0)
     cardnumbers = models.BigIntegerField(blank=True)
-    # cardnumbers = models.CharField(max_length=255, null=True)
     cardnumbers = models.CharField(max_length=255, null=True)
-    # cardnumbers = models.CharField(max_length=255, null=True, blank=True, default='Not Provided')
-    # cardnumbers = models.CharField(max_length=255, null=False, blank=False)
-
     expirydate = models.CharField(max_length=10, null=True)
     cvv = models.IntegerField(default=0)
 

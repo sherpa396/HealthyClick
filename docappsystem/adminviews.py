@@ -99,7 +99,6 @@ def DOCTOR(request):
 #     messages.success(request, "Record Delete Succeesfully!!!")
 #     return redirect("manage_doctors")
 
-# login_required(login_url="/")
 
 
 def UPDATE_DOCTOR(request, id):

@@ -120,8 +120,13 @@ urlpatterns = [
         userviews.View_Appointment_Details,
         name="viewappointmentdetails",
     ),
-    
+
+    # path for printing invoice
     path("ViewInvoice", views.invoice_view,  name="ViewInvoice"),
+    
+    #email path
+    path("sendemails", views.send_email, name="send_email"),
+
 
     # profile path
     path("Profile", views.PROFILE, name="profile"),

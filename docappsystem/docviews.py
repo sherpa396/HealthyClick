@@ -4,6 +4,7 @@ from dasapp.models import DoctorReg, Specialization, CustomUser, Appointment
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime
+from django.core.paginator import Paginator
 
 
 def DOCSIGNUP(request):
@@ -120,7 +121,7 @@ def Patient_Appointment_Details_Remark(request):
         patientaptdet.remark = remark
         patientaptdet.status = status
         patientaptdet.save()
-        messages.success(request, "Status Update successfully")
+        messages.success(request, "Status Update successfully !!")
         return redirect("view_appointment")
     return render(request, "doc/view_appointment.html", context)
 
@@ -155,8 +156,19 @@ def Patient_New_Appointment(request):
 def Patient_List_Approved_Appointment(request):
     doctor_admin = request.user
     doctor_reg = DoctorReg.objects.get(admin=doctor_admin)
-    patientdetails1 = Appointment.objects.filter(status='Approved',doctor_id=doctor_reg)
-    context = {'patientdetails1': patientdetails1}
+    
+    # Fetch all approved appointments for the doctor
+    patientdetails1 = Appointment.objects.filter(status='Approved', doctor_id=doctor_reg)
+
+    # Pagination logic
+    paginator = Paginator(patientdetails1, 1)  # Show 10 appointments per page
+    page_number = request.GET.get('page')  # Get the page number from the request
+    patientdetails1_page = paginator.get_page(page_number)  # Get the appointments for the current page
+
+    context = {
+        'patientdetails1': patientdetails1_page,  # Pass the paginated appointments
+        'paginator': paginator  # Pass the paginator to the template if needed
+    }
     return render(request, 'doc/patient_list_app_appointment.html', context)
 
 
@@ -183,14 +195,6 @@ def Patient_Appointment_Prescription(request):
     return render(request, "doc/patient_list_app_appointment.html", context)
 
 
-# def Patient_Appointment_Completed(request):
-#     doctor_admin = request.user
-#     doctor_reg = DoctorReg.objects.get(admin=doctor_admin)
-#     patientdetails1 = Appointment.objects.filter(
-#         status="Completed", doctor_id=doctor_reg
-#     )
-#     context = {"patientdetails1": patientdetails1}
-#     return render(request, "doc/patient_list_app_appointment.html", context)
 
 def Patient_Appointment_Completed(request):
     try:
@@ -223,7 +227,6 @@ def Patient_Appointment_Completed(request):
 
     # Render the response with the context data
     return render(request, "doc/patient_list_app_appointment.html", context)
-
 
 
 def Search_Appointments(request):

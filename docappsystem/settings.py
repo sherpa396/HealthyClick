@@ -132,9 +132,9 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 #Email sections
-EMAIL_BACKEND = "django.core.mail.backends.smpt.EmailBackend"
-EMAIL_HOST = "smtop@gmail.com"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS= True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = ""
-EMAIL_HOST_PASSWORD = ""
+EMAIL_PORT = 465
+EMAIL_HOST_USER = "True"
+EMAIL_HOST_PASSWORD = "False"

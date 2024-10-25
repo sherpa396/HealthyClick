@@ -10,14 +10,13 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from django.views import View
 from xhtml2pdf import pisa
-# from .utils import send_email_to_client
-# from django.shortcuts import render
+from .utils import send_email_to_client
 # from django.http import JsonResponse
 
 
-# def send_email(request):
-#     send_email_to_client()
-#     return redirect('/')
+def send_email(request):
+    send_email_to_client()
+    return redirect('/')
 
 User = get_user_model()
 
@@ -124,7 +123,6 @@ def render_to_pdf(template_src, context_dict={}):
 	if not pdf.err:
 		return HttpResponse(result.getvalue(), content_type='application/pdf')
 	return None
-
 
 #Opens up page as PDF
 class ViewPDF(View):

@@ -215,4 +215,3 @@ def View_Appointment_Details(request,id):
     }
 
     return render(request,'user_appointment-details.html',context)
-
