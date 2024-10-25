@@ -30,8 +30,7 @@
 * Feedback System for Patients.
 
 ## Admin
-* Signup their account. Then login.
-* Can view/approve doctor.
+
 
 
 ## Doctor

@@ -84,21 +84,25 @@
             <br>
         </div>
         <div class="details">
-            <p>Website:{{context.website}}</p>
-            <p>Address:{{context.address}}</p>
-            <p>Phone:{{context.phone}}</p>
-            <p>Email:{{context.email}}</p>
+            <p>Website : {{context.website}}</p>
+            <p>Address : {{context.address}}</p>
+            <p>Phone : {{context.phone}}</p>
+            <p>Email : {{context.email}}</p>
         </div>
         <hr>
             <center><h1>Prescription & Invoice</h1></center>
         <hr>
         <div class="bill">
-            <p>Doctor Remarks: {{context.doctor_remarks}}</p>
-            <p>Prescribed Medicine: {{context.prescribed_medicine}}</p>
-            <p>Recommended Test: {{context.recommended_test}}</p>
-            <p>Total Doctor Fee: Nrs.200</p>
-            <p>Doctor's Name:{{context.doctor_name}}</p>
+            <p>Bill No. : {{context.appnumber}}</p>
+            <p>Date : {{context.appointmentdate}}</p>
+            <p>Doctor Remarks : {{context.doctor_remarks}}</p>
+            <p>Prescribed Medicine : {{context.prescribed_medicine}}</p>
+            <p>Recommended Test : {{context.recommended_test}}</p>
+            <p>Total Doctor Fee : Nrs.200</p>
+            {% comment %} <p>Doctor's Name:{{context.doctor_name}}</p> {% endcomment %}
         </div>
+        <hr>
+        <div><center>***Medicine cures diseases, but only doctors can cure patients***</center></div>
     </div>
 </body>
 </html>
