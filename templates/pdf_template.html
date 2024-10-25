@@ -84,23 +84,21 @@
             <br>
         </div>
         <div class="details">
-            <p>Website:{{website}}</p>
-            <p>Address:{{address}}</p>
-            <p>Phone:{{phone}}</p>
-            <p>Email:{{email}}</p>
+            <p>Website:{{context.website}}</p>
+            <p>Address:{{context.address}}</p>
+            <p>Phone:{{context.phone}}</p>
+            <p>Email:{{context.email}}</p>
         </div>
         <hr>
             <center><h1>Prescription & Invoice</h1></center>
         <hr>
-		{% for i in invoice_details %}
         <div class="bill">
-            <p>Doctor Remarks: {{i.remark}}</p>
-            <p>Prescribed Medicine: {{i.prescription}}</p>
-            <p>Recommended Test: {{i.recommendedtest}}</p>
+            <p>Doctor Remarks: {{context.doctor_remarks}}</p>
+            <p>Prescribed Medicine: {{context.prescribed_medicine}}</p>
+            <p>Recommended Test: {{context.recommended_test}}</p>
             <p>Total Doctor Fee: Nrs.200</p>
-            <p>Doctor's Name:{{i.fullname}}</p>
+            <p>Doctor's Name:{{context.doctor_name}}</p>
         </div>
-		{% endfor %}
     </div>
 </body>
 </html>
