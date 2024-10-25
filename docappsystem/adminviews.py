@@ -100,7 +100,6 @@ def DOCTOR(request):
 #     return redirect("manage_doctors")
 
 
-
 def UPDATE_DOCTOR(request, id):
     doctor = Doctor.objects.get(id=id)
     context = {"doctor": doctor,}
@@ -120,9 +119,7 @@ def UPDATE_DOCTOR_DETAILS(request):
         messages.success(request, "Your doctor detail has been updated successfully")
         return redirect("manage_doctors")
     return render(request, "admin/update_doctor.html")
-
 # #end doctor
-
 
 
 @login_required(login_url="/")
@@ -169,34 +166,6 @@ def Search_Doctor(request):
         else:
             print("No Record Found")
             return render(request, "admin/search-doctor.html", {})
-
-
-# def Doctor_Between_Date_Report(request):
-#     start_date = request.GET.get("start_date")
-#     end_date = request.GET.get("end_date")
-
-#     doctor = []
-
-#     if start_date and end_date:
-#         # Validate the date inputs
-#         try:
-#             start_date = datetime.strptime(start_date, "%Y-%m-%d").date()
-#             end_date = datetime.strptime(end_date, "%Y-%m-%d").date()
-#         except ValueError:
-#             return render(
-#                 request,
-#                 "admin/doctor-between-date.html",
-#                 {"doctor": doctor, "error_message": "Invalid date format"},
-#             )
-
-#         # Filter visitors between the given date range
-#         doctor = DoctorReg.objects.filter(regdate_at__range=(start_date, end_date))
-
-#     return render(
-#         request,
-#         "admin/doctor-between-date.html",
-#         {"doctor": doctor, "start_date": start_date, "end_date": end_date},
-#     )
 
 
 @login_required(login_url="/")

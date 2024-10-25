@@ -25,9 +25,6 @@ def DOCSIGNUP(request):
         if CustomUser.objects.filter(username=username).exists():
             messages.warning(request, "Username already exist !!")
             return redirect("docsignup")
-        # if CustomUser.objects.filter(mobno=mobno).exists():
-        #     messages.warning(request, "Mobile number already exist")
-        #     return redirect("docsignup")
         else:
             user = CustomUser(
                 first_name=first_name,
@@ -126,7 +123,6 @@ def Patient_Appointment_Details_Remark(request):
     return render(request, "doc/view_appointment.html", context)
 
 
-
 def Patient_Approved_Appointment(request):
     doctor_admin = request.user
     doctor_reg = DoctorReg.objects.get(admin=doctor_admin)
@@ -195,7 +191,6 @@ def Patient_Appointment_Prescription(request):
     return render(request, "doc/patient_list_app_appointment.html", context)
 
 
-
 def Patient_Appointment_Completed(request):
     try:
         # Get the logged-in user (doctor)
@@ -253,34 +248,3 @@ def Search_Appointments(request):
             print("No Record Found")
             return render(request, "doc/search-appointment.html", {})
 
-
-# def Between_Date_Report(request):
-#     start_date = request.GET.get("start_date")
-#     end_date = request.GET.get("end_date")
-
-#     patient = []
-#     doctor_admin = request.user
-#     doctor_reg = DoctorReg.objects.get(admin=doctor_admin)
-
-#     if start_date and end_date:
-#         # Validate the date inputs
-#         try:
-#             start_date = datetime.strptime(start_date, "%Y-%m-%d").date()
-#             end_date = datetime.strptime(end_date, "%Y-%m-%d").date()
-#         except ValueError:
-#             return render(
-#                 request,
-#                 "doc/between-dates-report.html",
-#                 {"visitor": visitor, "error_message": "Invalid date format"},
-#             )
-
-#         # Filter Appointment between the given date range
-#         patient = Appointment.objects.filter(
-#             created_at__range=(start_date, end_date)
-#         ) & Appointment.objects.filter(doctor_id=doctor_reg)
-
-#     return render(
-#         request,
-#         "doc/between-dates-report.html",
-#         {"patient": patient, "start_date": start_date, "end_date": end_date},
-#     )

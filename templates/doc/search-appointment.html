@@ -22,7 +22,7 @@
                 
                 {% csrf_token %}
                 <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">Search(By Fullname/Appointment Number)</label>
+                    <label class="col-sm-4 col-form-label">Search(By Email/Phone Number)</label>
                     <div class="col-sm-10">
                         <input type="text" id="query" name="query" class="form-control" required="">
                     </div>
@@ -37,7 +37,7 @@
     <div class="card-body">
         {% if messages %}
         {% for message in messages %}
-         {% if message.tags == 'error' %}
+        {% if message.tags == 'error' %}
        <div class="alert alert-warning alert-dismissible fade show" role="alert">
       {{message}}
      <button type="button" class="close" data-dismiss="alert" aria-label="Close">

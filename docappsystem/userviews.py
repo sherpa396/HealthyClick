@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from dasapp.models import *
 import random
+import re
 from datetime import datetime
 from django.contrib import messages
 from django.core.exceptions import ValidationError
@@ -178,7 +179,6 @@ def create_appointment(request):
     return render(request, "appointment.html", context)
 
 
-
 def book_appointment(doctor_id, appointment_date, appointment_time):
     # Check if the doctor is available at the selected date and time
     if Appointment.objects.filter(doctor_id=doctor_id, date_of_appointment=appointment_date, time_of_appointment=appointment_time).exists():
@@ -191,20 +191,38 @@ def User_Search_Appointments(request):
     
     if request.method == "GET":
         query = request.GET.get('query', '')
+        
         if query:
-            # Filter records where fullname or Appointment Number contains the query
-            patient = Appointment.objects.filter(fullname__icontains=query) | Appointment.objects.filter(appointmentnumber__icontains=query)
-            messages.info(request, "Search against " + query)
+            # Check if the query is a valid email or 10-digit phone number
+            email_pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'  # Regex for validating an email
+            phone_pattern = r'^\d{10}$'  # Regex for exactly 10 digits
+            
+            # Validate email or phone number
+            if re.match(email_pattern, query):  # If it's a valid email
+                patient = Appointment.objects.filter(email=query)
+                messages.info(request, "Search results for email: " + query)
+            elif re.match(phone_pattern, query):  # If it's a valid 10-digit phone number
+                patient = Appointment.objects.filter(mobilenumber=query)
+                messages.info(request, "Search results for phone number: " + query)
+            else:
+                # If it doesn't match any pattern
+                patient = None
+                messages.error(request, "Please enter a valid email or 10-digit phone number.")
+            
             context = {'patient': patient, 'query': query, 'page': page}
             return render(request, 'search-appointment.html', context)
+        
         else:
-            print("No Record Found")
+            messages.error(request, "No query entered. Please provide an email or phone number.")
             context = {'page': page}
             return render(request, 'search-appointment.html', context)
     
     # If the request method is not GET
     context = {'page': page}
     return render(request, 'search-appointment.html', context)
+
+
+
 def View_Appointment_Details(request,id):
     page = Page.objects.all()
     patientdetails=Appointment.objects.filter(id=id)

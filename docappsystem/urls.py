@@ -35,6 +35,7 @@ urlpatterns = [
     path("Admin/ViewDoctorAppointmentList/<str:id>", adminviews.ViewDoctorAppointmentList, name="viewdoctorappointmentlist",),
     path("Admin/ViewPatientDetails/<str:id>", adminviews.ViewPatientDetails, name="viewpatientdetails",),
     
+    
     path("Admin/Doctor", adminviews.DOCTOR, name="add_doctors"),
     # path("Admin/ManageDoctor", adminviews.MANAGEDOCTOR, name="manage_doctors",),
     # path("Admin/DeleteDoctor/<str:id>", adminviews.DELETE_DOCTOR, name="delete_doctors",),
@@ -104,7 +105,6 @@ urlpatterns = [
         name="patientappointmentcompleted",
     ),
     path("SearchAppointment", docviews.Search_Appointments, name="search_appointment"),
-    # path("BetweenDateReport", docviews.Between_Date_Report, name="between_date_report"),
     
     # This is User Panel
     path("userbase/", userviews.USERBASE, name="userbase"),
