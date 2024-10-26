@@ -122,7 +122,7 @@ def create_appointment(request):
                 additional_msg=additional_msg,
             )
             new_appointment.save()
-            messages.success(request, "Your Appointment Request Has Been Sent. We Will Contact You Soon")
+            messages.success(request, "Your appointment request has been sent. We will contact you soon !!")
 
             # Update in-memory list with the new appointment
             appointments.append({
@@ -138,10 +138,6 @@ def create_appointment(request):
 
     context = {"doctorview": doctorview, "page": page}
     return render(request, "appointment.html", context)
-
-
-
-
 
 
 

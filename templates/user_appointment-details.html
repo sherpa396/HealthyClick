@@ -79,20 +79,18 @@
                           <th>Date of Appointment</th>
                           <td>{{i.date_of_appointment}}</td>
                     </tr>
-                        <tr>
-                          
-                          <th>Appointment Time</th>
-                          <td>{{i.time_of_appointment}}</td>
-                          <th>Symptoms</th>
-                          <td>{{i.additional_msg}}</td>
-                        </tr>
-                        <tr>
-                                            
-                          {% if i.status == '0' %}
-                          <th>Doctor Remarks</th>
-                          <td>Not Updatet Yet</td>
-                          {% else %}
-                          <tr>
+                    <tr>
+                        <th>Appointment Time</th>
+                        <td>{{i.time_of_appointment}}</td>
+                        <th>Symptoms</th>
+                        <td>{{i.additional_msg}}</td>
+                    </tr>
+                    <tr>
+                        {% if i.status == '0' %}
+                        <th>Doctor Remarks</th>
+                        <td>Not Updatet Yet</td>
+                        {% else %}
+                      <tr>
                           <th>Doctor Remarks</th>
                           <td>{{ i.remark}}</td>{% endif %}
                           
@@ -128,6 +126,7 @@
                   </div>
                   <!-- Print Report Section End -->
                   {% endfor %}
+                  
             </div>
             </div>
             </div>

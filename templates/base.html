@@ -2,9 +2,7 @@
 <html lang="en">
     {% load static %}
    <head>
-     
       <title>Doctor & Admin Dashboard</title>
-     
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap">
       <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css'%}">
       <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css'%}">
@@ -15,17 +13,13 @@
 
     <div class="main-wrapper">
         {% include 'includes/header.html' %}
-
         {% include 'includes/sidebar.html' %}
-        
         <div class="page-wrapper">
          {% block content %}
          {% endblock %}
-
-            {% include 'includes/footer.html' %}
+         {% include 'includes/footer.html' %}
       </div>
    </div>
-
     <script src="{% static 'assets/js/jquery-3.6.0.min.js'%}"></script>
     <script src="{% static 'assets/js/popper.min.js'%}"></script>
     <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js'%}"></script>
