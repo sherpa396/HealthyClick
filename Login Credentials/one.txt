@@ -5,8 +5,8 @@ doc1	    doc1@gmail.com	    Bhagawan	    Koirala	                9845655456	    
 doc2	    doc2@gmail.com	    Sanduk	        Ruit	                9765124565	    doc2
 doc3	    doc3@gmail.com	    Dr. Noora       Pradhan	                9845681585	    doc3
 doc4	    doc4@gmail.com	    Dr. Mala        Shrestha                9812345678	    doc4
-doc5	    doc5@gmail.com	    Dr. Bharat      Khadka	                9812345678	    doc5
-doc6	    doc6@gmail.com	    Dr. Shraddha    Pradhan Gorkhali	    9812345678	    doc6
+doc5	    doc5@gmail.com	    Dr. Bharat      Khadka	                9812345679	    doc5
+doc6	    doc6@gmail.com	    Dr. Shraddha    Pradhan	    9812345677	    doc6
 					
 					
 

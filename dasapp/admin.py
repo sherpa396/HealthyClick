@@ -31,3 +31,5 @@ admin.site.register(Specialization)
 admin.site.register(DoctorReg)
 admin.site.register(Appointment)
 admin.site.register(Page)
+admin.site.register(Payment)
+
