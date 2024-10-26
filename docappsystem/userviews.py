@@ -44,12 +44,13 @@ def Index(request):
     return render(request, "index.html", context)
 
 
+import sqlite3
+
 def create_appointment(request):
     doctorview = DoctorReg.objects.all()
     page = Page.objects.all()
 
     if request.method == "POST":
-        # Collect form data
         appointmentnumber = random.randint(100000000, 999999999)
         fullname = request.POST.get("fullname")
         email = request.POST.get("email")
@@ -63,127 +64,66 @@ def create_appointment(request):
         doctor_id = request.POST.get("doctor_id")
         additional_msg = request.POST.get("additional_msg")
 
-        # Check if email or mobile number is already registered for the same doctor
-        doc_instance = DoctorReg.objects.get(id=doctor_id)
-        email_exists = Appointment.objects.filter(email=email, doctor_id=doc_instance).exists()
-        mobile_exists = Appointment.objects.filter(mobilenumber=mobilenumber, doctor_id=doc_instance).exists()
-
-        if email_exists:
-            messages.error(request, "You have already registered with this doctor using this email.")
-        if mobile_exists:
-            messages.error(request, "You have already registered with this doctor using this mobile number.")
-
-        # If there are error messages (for email or mobile), stop further processing
-        if email_exists or mobile_exists:
+        # Check for scheduling conflicts
+        conflict_message = book_appointment(date_of_appointment, time_of_appointment)
+        if conflict_message:
+            messages.warning(request, conflict_message)
             context = {
-                "doctorview": doctorview,
-                "page": page,
+                # "doctorview": doctorview,
+                # "page": page,
                 "fullname": fullname,
                 "email": email,
                 "mobilenumber": mobilenumber,
-                "address": address,
-                "age": age,
-                "gender": gender,
-                "appointmenttype": appointmenttype,
+                # "address": address,
+                # "age": age,
+                # "gender": gender,
+                # "appointmenttype": appointmenttype,
                 "date_of_appointment": date_of_appointment,
                 "time_of_appointment": time_of_appointment,
-                "doctor_id": doctor_id,
-                "additional_msg": additional_msg,
+                # "doctor_id": doctor_id,
+                # "additional_msg": additional_msg,
             }
             return render(request, "appointment.html", context)
 
-        # Validate the date
+        # If no conflict, insert the new appointment
         try:
-            appointment_date = datetime.strptime(date_of_appointment, "%Y-%m-%d").date()
-            today_date = datetime.now().date()
+            conn = sqlite3.connect('db.sqlite3')  # Connect to your database
+            cursor = conn.cursor()
+            cursor.execute('''INSERT INTO dasapp_appointment
+                            (appointmentnumber, fullname, email, mobilenumber, address, age, gender, appointmenttype,
+                            date_of_appointment, time_of_appointment, additional_msg)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                           (appointmentnumber, fullname, email, mobilenumber, address, age, gender, appointmenttype,
+                            date_of_appointment, time_of_appointment, additional_msg))
+            conn.commit()
+            messages.success(request, "Your Appointment Request Has Been Sent. We Will Contact You Soon")
+        except Exception as e:
+            messages.error(request, f"Error in booking appointment: {str(e)}")
+        finally:
+            conn.close()
 
-            # Only show error if the selected date is in the past
-            if appointment_date <= today_date:
-                messages.error(request, "Please select a date in the future for your appointment")
-                context = {
-                    "doctorview": doctorview,
-                    "page": page,
-                    "fullname": fullname,
-                    "email": email,
-                    "mobilenumber": mobilenumber,
-                    "address": address,
-                    "age": age,
-                    "gender": gender,
-                    "appointmenttype": appointmenttype,
-                    "date_of_appointment": date_of_appointment,
-                    "time_of_appointment": time_of_appointment,
-                    "doctor_id": doctor_id,
-                    "additional_msg": additional_msg,
-                }
-                return render(request, "appointment.html", context)
-        except ValueError:
-            messages.error(request, "Invalid date format")
-            context = {
-                "doctorview": doctorview,
-                "page": page,
-                "fullname": fullname,
-                "email": email,
-                "mobilenumber": mobilenumber,
-                "address": address,
-                "age": age,
-                "gender": gender,
-                "appointmenttype": appointmenttype,
-                "date_of_appointment": date_of_appointment,
-                "time_of_appointment": time_of_appointment,
-                "doctor_id": doctor_id,
-                "additional_msg": additional_msg,
-            }
-            return render(request, "appointment.html", context)
-
-        # Apply scheduling check using book_appointment function
-        conflict_message = book_appointment(doctor_id, date_of_appointment, time_of_appointment)
-        if conflict_message:  # If there's a scheduling conflict
-            messages.warning(request, conflict_message)  # Show warning instead of redirecting
-            context = {
-                "doctorview": doctorview,
-                "page": page,
-                "fullname": fullname,
-                "email": email,
-                "mobilenumber": mobilenumber,
-                "address": address,
-                "age": age,
-                "gender": gender,
-                "appointmenttype": appointmenttype,
-                "date_of_appointment": date_of_appointment,
-                "time_of_appointment": time_of_appointment,
-                "doctor_id": doctor_id,
-                "additional_msg": additional_msg,
-            }
-            return render(request, "appointment.html", context)
-
-        # If date is valid, create the new Appointment
-        appointmentdetails = Appointment.objects.create(
-            appointmentnumber=appointmentnumber,
-            fullname=fullname,
-            email=email,
-            address=address,
-            age=age,
-            gender=gender,
-            appointmenttype=appointmenttype,
-            mobilenumber=mobilenumber,
-            date_of_appointment=date_of_appointment,
-            time_of_appointment=time_of_appointment,
-            doctor_id=doc_instance,
-            additional_msg=additional_msg,
-        )
-
-        messages.success(request, "Your Appointment Request Has Been Sent. We Will Contact You Soon")
         return redirect("appointment")
 
     context = {"doctorview": doctorview, "page": page}
     return render(request, "appointment.html", context)
 
-
 def book_appointment(doctor_id, appointment_date, appointment_time):
-    # Check if the doctor is available at the selected date and time
-    if Appointment.objects.filter(doctor_id=doctor_id, date_of_appointment=appointment_date, time_of_appointment=appointment_time).exists():
+    try:
+        conn = sqlite3.connect('db.sqlite3')
+        cursor = conn.cursor()
+        cursor.execute('''SELECT COUNT(*) FROM dasapp_appointment
+                          WHERE doctor_id = ? AND date_of_appointment = ? AND time_of_appointment = ?''',
+                       (doctor_id, appointment_date, appointment_time))
+        conflict_exists = cursor.fetchone()[0] > 0
+    except Exception as e:
+        return f"Error checking appointment availability: {str(e)}"
+    finally:
+        conn.close()
+
+    if conflict_exists:
         return "The doctor is already booked for this time slot. Please select another date or time."
     return None  # No conflict
+
 
 
 def User_Search_Appointments(request):

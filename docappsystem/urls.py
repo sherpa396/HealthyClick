@@ -29,18 +29,20 @@ urlpatterns = [
     path("UPDATE_Specialization_DETAILS", adminviews.UPDATE_SPECIALIZATION_DETAILS, name="update_specilizations_details",),
     
     
-    # doctor management
+    # doctor view management
     path("Admin/DoctorList", adminviews.DoctorList, name="viewdoctorlist"),
     path("Admin/ViewDoctorDetails/<str:id>", adminviews.ViewDoctorDetails, name="viewdoctordetails",),
     path("Admin/ViewDoctorAppointmentList/<str:id>", adminviews.ViewDoctorAppointmentList, name="viewdoctorappointmentlist",),
     path("Admin/ViewPatientDetails/<str:id>", adminviews.ViewPatientDetails, name="viewpatientdetails",),
     
-    
-    path("Admin/Doctor", adminviews.DOCTOR, name="add_doctors"),
-    # path("Admin/ManageDoctor", adminviews.MANAGEDOCTOR, name="manage_doctors",),
-    # path("Admin/DeleteDoctor/<str:id>", adminviews.DELETE_DOCTOR, name="delete_doctors",),
-    path("UpdateDoctor/<str:id>", adminviews.UPDATE_DOCTOR, name="update_doctors",),
-    # path("UPDATE_Doctor_DETAILS", adminviews.UPDATE_DOCTOR_DETAILS, name="update_doctors_details",),
+    # doctor crud management
+    path("Admin/Doctor", adminviews.add_doctor, name="add_doctor"),
+    path("Admin/ManageDoctor", adminviews.MANAGEDOCTOR, name="manage_doctors",),
+    path("Admin/DeleteDoctor/<str:id>", adminviews.DELETE_DOCTOR, name="delete_doctor",),
+    path("Admin/UpdateDoctor/<str:id>", adminviews.UPDATE_DOCTOR, name="update_doctor",),
+    path("Admin/DoctorList/", adminviews.DOCTOR_LIST, name="doctor_list"),
+
+    path("Admin/UPDATE_Doctor_Details", adminviews.UPDATE_DOCTOR_DETAILS, name="update_doctor_details",),
     
     
     

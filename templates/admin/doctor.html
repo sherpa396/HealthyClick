@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <div class="content container-fluid">
     <div class="page-header">
@@ -46,7 +47,7 @@
                        {% endif %}
                         {% endfor %}
                        {% endif %}
-                       <form method="POST" action="{% url 'add_doctors' %}" enctype="multipart/form-data">
+                       <form method="POST" action="{% url 'add_doctor' %}" enctype="multipart/form-data">
                         {% csrf_token %}
    
     <div class="form-group row">
@@ -121,8 +122,15 @@
           </div>
           <div class="form-group">
             <label>Password</label>
-            <input id="password" type="password" class="form-control" placeholder="Password" name="password" required="true"/>
-          </div>
+            <div class="input-group">
+                <input id="password" type="password" class="form-control" placeholder="Password" name="password" required="true"/>
+                <div class="input-group-append">
+                    <span class="input-group-text" onclick="togglePasswordVisibility()">
+                        <i id="eye-icon" class="fa fa-eye"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
           <div class="col-sm-10" >
             <center>
             <button type="submit" class="btn btn-dark">Add Doctor</button>
@@ -135,5 +143,22 @@
     </div>
     </div>
     </div>
+
+    <script>
+      function togglePasswordVisibility() {
+          var passwordField = document.getElementById("password");
+          var eyeIcon = document.getElementById("eye-icon");
+          
+          if (passwordField.type === "password") {
+              passwordField.type = "text";
+              eyeIcon.classList.remove("fa-eye");
+              eyeIcon.classList.add("fa-eye-slash");
+          } else {
+              passwordField.type = "password";
+              eyeIcon.classList.remove("fa-eye-slash");
+              eyeIcon.classList.add("fa-eye");
+          }
+      }
+  </script>
 
 {% endblock %}

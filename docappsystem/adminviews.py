@@ -1,8 +1,13 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
-from dasapp.models import Specialization, DoctorReg, Appointment, Page
+from dasapp.models import Specialization, DoctorReg, Appointment, Page, CustomUser
 from django.contrib import messages
 from datetime import datetime
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
+from django.shortcuts import render, redirect, get_object_or_404
 
 
 @login_required(login_url="/")
@@ -12,7 +17,8 @@ def ADMINHOME(request):
     context = {"doctor_count": doctor_count,"specialization_count": specialization_count,}
     return render(request, "admin/adminhome.html", context)
 
-#for specialization
+#for adding  new specialization
+
 @login_required(login_url="/")
 def SPECIALIZATION(request):
     if request.method == "POST":
@@ -44,8 +50,7 @@ def DELETE_SPECIALIZATION(request, id):
     messages.success(request, "Record Delete Succeesfully!!!")
     return redirect("manage_specilizations")
 
-login_required(login_url="/")
-
+@login_required(login_url="/")
 
 def UPDATE_SPECIALIZATION(request, id):
     specialization = Specialization.objects.get(id=id)
@@ -68,57 +73,141 @@ def UPDATE_SPECIALIZATION_DETAILS(request):
     return render(request, "admin/update_specialization.html")
 
 
-#for doctors
+
+#adding new doctor
 @login_required(login_url="/")
-def DOCTOR(request):
+def add_doctor(request):
     if request.method == "POST":
-        doctorname = request.POST.get("doctorname")
-        
-        # Check if the doctor already exists
-        if Doctor.objects.filter(dname=doctorname).exists():
-            messages.error(request, "Doctor already exists !")
-            return redirect("add_doctors")  # Redirect back to the form
+        # Collect form data
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        email = request.POST.get("email")
+        username = request.POST.get("username")
+        mobilenumber = request.POST.get("mobno")
+        specialization_id = request.POST.get("specialization_id")
+        password = request.POST.get("password")
+        profile_pic = request.FILES.get("pic")
 
-        # If it doesn't exist, create and save the new specialization
-        doctor = Doctor(dname=doctorname)
-        doctor.save()
+        # Check if user with this username or email already exists
+        if CustomUser.objects.filter(username=username).exists() or CustomUser.objects.filter(email=email).exists():
+            messages.error(request, "User with this username or email already exists!")
+            return redirect("add_doctor")
+
+        # Get specialization from the database
+        try:
+            specialization = Specialization.objects.get(id=specialization_id)
+        except Specialization.DoesNotExist:
+            messages.error(request, "Selected specialization does not exist!")
+            return redirect("add_doctors")
+
+        # Create the CustomUser and DoctorReg instances
+        user = CustomUser.objects.create(
+            username=username,
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            user_type="2",  # Set to "doc" type
+            profile_pic=profile_pic,
+            password=make_password(password)  # Encrypt the password
+        )
+
+        # Create the DoctorReg instance and link it to the CustomUser
+        doctor = DoctorReg.objects.create(
+            admin=user,
+            mobilenumber=mobilenumber,
+            specialization_id=specialization,
+        )
+
         messages.success(request, "Doctor added successfully!")
-        return redirect("add_doctors")
+        return redirect("add_doctor")
 
-    return render(request, "admin/doctor.html")
+    # Fetch all specializations for the dropdown
+    specialization = Specialization.objects.all()
+    return render(request, "admin/doctor.html", {"specialization": specialization})
+
+
+@login_required(login_url="/")
+def MANAGEDOCTOR(request):
+    doctor = DoctorReg.objects.all()
+    context = {"doctor": doctor,}
+    return render(request, "admin/manage_doctor.html", context)
+
+@login_required(login_url="/")
+def DELETE_DOCTOR(request, id):
+    doctor = get_object_or_404(DoctorReg, id=id)  # Correctly fetch the doctor record
+
+    if request.method == "GET":
+        doctor.delete()  # Delete the doctor
+        messages.success(request, "Doctor deleted successfully.")  # Success message
+        # return redirect("admin/doctor_list.html")
+        return redirect('doctor_list')
+
 
 # @login_required(login_url="/")
-# def MANAGEDOCTOR(request):
-#     doctor = Doctor.objects.all()
-#     context = {"doctor": doctor,}
-#     return render(request, "admin/manage_doctor.html", context)
+# def DOCTOR_LIST(request):
+#     doctors = DoctorReg.objects.all()  # Retrieve all doctors
+#     return render(request, "admin/doctor_list.html", {"doctors": doctors})
 
 
-# def DELETE_DOCTOR(request, id):
-#     doctor = Doctor.objectsdoctor.delete()
-#     messages.success(request, "Record Delete Succeesfully!!!")
-#     return redirect("manage_doctors")
+@login_required(login_url="/")
+def DOCTOR_LIST(request):
+    doctorlist = DoctorReg.objects.all()
+    context = {"doctorlist": doctorlist,}
+    return render(request, "admin/doctor_list.html", context)
 
 
+@login_required(login_url="/")
 def UPDATE_DOCTOR(request, id):
-    doctor = Doctor.objects.get(id=id)
+    doctor = DoctorReg.objects.get(id=id)
     context = {"doctor": doctor,}
     return render(request, "admin/update_doctor.html", context)
 
 
-login_required(login_url="/")
+@login_required(login_url="/")
+def UPDATE_DOCTOR_DETAILS(request, sep_id):
+    # Retrieve the doctor record from the database
+    DoctorReg = get_object_or_404(DoctorReg, id=sep_id)
 
-
-def UPDATE_DOCTOR_DETAILS(request):
+    # Check if the form is submitted
     if request.method == "POST":
-        sep_id = request.POST.get("sep_id")
-        dname = request.POST.get("dname")
-        doctor = Doctor.objects.get(id=sep_id)
-        doctor.dname = dname
-        doctor.save()
-        messages.success(request, "Your doctor detail has been updated successfully")
-        return redirect("manage_doctors")
-    return render(request, "admin/update_doctor.html")
+        # Get updated data from the form
+        profile_pic=request.FILES.get("profile_pic"),
+        username = request.POST.get("username"),
+        first_name = request.POST.get("first_name"),
+        last_name = request.POST.get("last_name"),
+        email = request.POST.get("email"),
+        password = request.POST.get("password"),
+        mobilenumber = request.POST.get("mobilenumber")
+        specialization_id = request.POST.get("specialization_id")
+
+        # Update the doctor's details
+        DoctorReg.username = username,
+        DoctorReg.first_name = first_name,
+        DoctorReg.last_name = last_name,
+        DoctorReg.email = email,
+        DoctorReg.profile_pic=profile_pic,
+        DoctorReg.password = password,
+        DoctorReg.mobilenumber = mobilenumber,
+        DoctorReg.specialization_id = specialization_id,
+        
+        # Save the updates to the database
+        DoctorReg.save()
+        
+        # Show a success message
+        messages.success(request, "Doctor details updated successfully")
+        
+        # Redirect to the manage doctors page
+        return redirect("doctor_list")
+    
+    # Load specializations for the form dropdown
+    specializations = Specialization.objects.all()
+
+    # Render the form with the current doctor data
+    return render(request, "admin/update_doctor.html", {
+        "doctor": DoctorReg,
+        "specializations": specializations
+    })
+
 # #end doctor
 
 
