@@ -42,7 +42,9 @@ urlpatterns = [
     path("Admin/UpdateDoctor/<str:id>", adminviews.UPDATE_DOCTOR, name="update_doctor",),
     path("Admin/DoctorList/", adminviews.DOCTOR_LIST, name="doctor_list"),
 
-    path("Admin/UPDATE_Doctor_Details", adminviews.UPDATE_DOCTOR_DETAILS, name="update_doctor_details",),
+    path("Admin/UPDATE_Doctor_Details/<int:sep_id>/", adminviews.UPDATE_DOCTOR_DETAILS, name="update_doctor_details"),
+
+    # path("Admin/UPDATE_Doctor_Details", adminviews.UPDATE_DOCTOR_DETAILS, name="update_doctor_details",),
     
     
     

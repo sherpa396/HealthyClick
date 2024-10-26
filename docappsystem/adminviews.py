@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 
 
 @login_required(login_url="/")
@@ -58,9 +59,7 @@ def UPDATE_SPECIALIZATION(request, id):
     return render(request, "admin/update_specialization.html", context)
 
 
-login_required(login_url="/")
-
-
+@login_required(login_url="/")
 def UPDATE_SPECIALIZATION_DETAILS(request):
     if request.method == "POST":
         sep_id = request.POST.get("sep_id")
@@ -169,52 +168,47 @@ def UPDATE_DOCTOR_DETAILS(request, sep_id):
     # Retrieve the doctor record from the database
     doctor = get_object_or_404(DoctorReg, id=sep_id)
 
-    # Store the current specialization to retain it during update
-    current_specialization_id = doctor.specialization_id
-
     # Check if the form is submitted
     if request.method == "POST":
         # Get updated data from the form
-        profile_pic = request.FILES.get("profile_pic")  # Note: No comma at the end
+        profile_pic = request.FILES.get("profile_pic")
         username = request.POST.get("username")
         first_name = request.POST.get("first_name")
         last_name = request.POST.get("last_name")
         email = request.POST.get("email")
         password = request.POST.get("password")
         mobilenumber = request.POST.get("mobilenumber")
+        print(f"Mobilenumber from form: {mobilenumber}")
 
-        # Update the doctor's details
+        # Validate that mobilenumber is provided and not just whitespace
+        if not mobilenumber or mobilenumber.strip() == "":
+            messages.error(request, "Mobile number is required.")
+            return render(request, "admin/update_doctor.html", {"doctor": doctor})
+
+
+        # Update the doctor's details without modifying the specialization
         doctor.username = username
         doctor.first_name = first_name
         doctor.last_name = last_name
         doctor.email = email
-        if profile_pic:  # Only update if a new profile picture is uploaded
+        if profile_pic:
             doctor.profile_pic = profile_pic
         doctor.password = password  # Consider hashing this before saving!
         doctor.mobilenumber = mobilenumber
-        
-        # Retain existing specialization while saving
-        doctor.specialization_id = current_specialization_id
-        
+
         # Save the updates to the database
         doctor.save()
-        
+
         # Show a success message
         messages.success(request, "Doctor details updated successfully")
         
         # Redirect to the manage doctors page
         return redirect("doctor_list")
     
-    # Load specializations for the form dropdown (if needed for other purposes)
-    specializations = Specialization.objects.all()
-
     # Render the form with the current doctor data
     return render(request, "admin/update_doctor.html", {
         "doctor": doctor,
-        "specializations": specializations  # This can be removed if not used in form
     })
-
-# #end doctor
 
 
 @login_required(login_url="/")

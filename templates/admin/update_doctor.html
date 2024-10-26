@@ -34,7 +34,7 @@
                         {% endfor %}
                     {% endif %}
 
-                    <form method="POST" action="{% url 'update_doctor_details' %}" enctype="multipart/form-data">
+                    <form action="{% url 'update_doctor_details' doctor.id %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
 
                         <div class="form-group">
@@ -64,13 +64,13 @@
 
                         <div class="form-group">
                             <label>Mobile Number</label>
-                            <input id="mobno" type="text" class="form-control" name="mobno" maxlength="10" pattern="[0-9]+" value="{{ doctor.mobilenumber }}" required />
+                            <input id="mobno" type="text" class="form-control" name="mobilenumber" maxlength="10" pattern="[0-9]+" value="{{ doctor.mobilenumber }}" required />
                         </div>
 
-                        <div class="form-group">
+                        {% comment %} div class="form-group">
                             <label for="specialization">Specialization</label>
                             <input type="text" class="form-control" value="{{ doctor.specialization_id.sname }}" readonly>
-                        </div>
+                        </div>< {% endcomment %}
 
                         <div class="form-group">
                             <label>Password</label>
