@@ -44,7 +44,33 @@ def Index(request):
     return render(request, "index.html", context)
 
 
-import sqlite3
+
+# In-memory list to store appointment slots for quick conflict checks
+appointments = []
+
+def load_prebooked_appointments():
+    # Load existing appointments into the in-memory list
+    global appointments
+    appointments = list(Appointment.objects.values("doctor_id", "date_of_appointment", "time_of_appointment"))
+
+# Load appointments at startup
+load_prebooked_appointments()
+
+def book_appointment(doctor_id, appointment_date, appointment_time):
+    # Check for conflicts in the in-memory list
+    for appointment in appointments:
+        if (appointment["doctor_id"] == doctor_id and
+            appointment["date_of_appointment"] == appointment_date and
+            appointment["time_of_appointment"] == appointment_time):
+            return "The doctor is already booked for this time slot. Please select another date or time."
+
+    # No conflict; add the appointment details to the in-memory list
+    appointments.append({
+        "doctor_id": doctor_id,
+        "date_of_appointment": appointment_date,
+        "time_of_appointment": appointment_time
+    })
+    return None
 
 def create_appointment(request):
     doctorview = DoctorReg.objects.all()
@@ -61,68 +87,63 @@ def create_appointment(request):
         appointmenttype = request.POST.get("appointmenttype")
         date_of_appointment = request.POST.get("date_of_appointment")
         time_of_appointment = request.POST.get("time_of_appointment")
-        doctor_id = request.POST.get("doctor_id")
+        doctor_id = int(request.POST.get("doctor_id"))
         additional_msg = request.POST.get("additional_msg")
 
         # Check for scheduling conflicts
-        conflict_message = book_appointment(date_of_appointment, time_of_appointment)
+        conflict_message = book_appointment(doctor_id, date_of_appointment, time_of_appointment)
         if conflict_message:
             messages.warning(request, conflict_message)
             context = {
-                # "doctorview": doctorview,
-                # "page": page,
+                "doctorview": doctorview,
+                "page": page,
                 "fullname": fullname,
                 "email": email,
                 "mobilenumber": mobilenumber,
-                # "address": address,
-                # "age": age,
-                # "gender": gender,
-                # "appointmenttype": appointmenttype,
                 "date_of_appointment": date_of_appointment,
                 "time_of_appointment": time_of_appointment,
-                # "doctor_id": doctor_id,
-                # "additional_msg": additional_msg,
             }
             return render(request, "appointment.html", context)
 
-        # If no conflict, insert the new appointment
+        # No conflict; create new appointment in the database
         try:
-            conn = sqlite3.connect('db.sqlite3')  # Connect to your database
-            cursor = conn.cursor()
-            cursor.execute('''INSERT INTO dasapp_appointment
-                            (appointmentnumber, fullname, email, mobilenumber, address, age, gender, appointmenttype,
-                            date_of_appointment, time_of_appointment, additional_msg)
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
-                           (appointmentnumber, fullname, email, mobilenumber, address, age, gender, appointmenttype,
-                            date_of_appointment, time_of_appointment, additional_msg))
-            conn.commit()
+            new_appointment = Appointment.objects.create(
+                appointmentnumber=appointmentnumber,
+                fullname=fullname,
+                email=email,
+                mobilenumber=mobilenumber,
+                address=address,
+                age=age,
+                gender=gender,
+                appointmenttype=appointmenttype,
+                date_of_appointment=date_of_appointment,
+                time_of_appointment=time_of_appointment,
+                doctor_id_id=doctor_id,
+                additional_msg=additional_msg,
+            )
+            new_appointment.save()
             messages.success(request, "Your Appointment Request Has Been Sent. We Will Contact You Soon")
+
+            # Update in-memory list with the new appointment
+            appointments.append({
+                "doctor_id": doctor_id,
+                "date_of_appointment": date_of_appointment,
+                "time_of_appointment": time_of_appointment
+            })
+
         except Exception as e:
             messages.error(request, f"Error in booking appointment: {str(e)}")
-        finally:
-            conn.close()
 
         return redirect("appointment")
 
     context = {"doctorview": doctorview, "page": page}
     return render(request, "appointment.html", context)
 
-def book_appointment(doctor_id, appointment_date, appointment_time):
-    try:
-        conn = sqlite3.connect('db.sqlite3')
-        cursor = conn.cursor()
-        cursor.execute('''SELECT COUNT(*) FROM dasapp_appointment
-                          WHERE doctor_id = ? AND date_of_appointment = ? AND time_of_appointment = ?''',
-                       (doctor_id, appointment_date, appointment_time))
-        conflict_exists = cursor.fetchone()[0] > 0
-    except Exception as e:
-        return f"Error checking appointment availability: {str(e)}"
-    finally:
-        conn.close()
 
-    if conflict_exists:
-        return "The doctor is already booked for this time slot. Please select another date or time."
-    return None  # No conflict
+
+
+
+
 
 
 
@@ -173,4 +194,3 @@ def View_Appointment_Details(request,id):
     }
 
     return render(request,'user_appointment-details.html',context)
-

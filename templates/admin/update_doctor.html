@@ -68,19 +68,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Specialization</label>
-                            <select name="specialization_id" id="specialization_id" class="form-control" required>
-                                <option value="">Choose Specialization</option>
-                                {% for specialization in specializations %}
-                                    <option value="{{ specialization.id }}" {% if specialization.id == doctor.specialization_id_id %}selected{% endif %}>{{ specialization.sname }}</option>
-                                {% endfor %}
-                            </select>
+                            <label for="specialization">Specialization</label>
+                            <input type="text" class="form-control" value="{{ doctor.specialization_id.sname }}" readonly>
                         </div>
 
                         <div class="form-group">
                             <label>Password</label>
                             <div class="input-group">
-                                <input id="password" type="password" class="form-control" placeholder="Password" name="password" />
+                                <input id="password" type="password" class="form-control" placeholder="Password" name="password"required/>
                                 <div class="input-group-append">
                                     <span class="input-group-text" onclick="togglePasswordVisibility()">
                                         <i id="eye-icon" class="fa fa-eye"></i>

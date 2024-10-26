@@ -215,3 +215,115 @@ def View_Appointment_Details(request,id):
     }
 
     return render(request,'user_appointment-details.html',context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    import sqlite3  # Importing sqlite3 for database connection
+
+def schedule_appointment(doctor_id, user_requested_date, user_requested_time):
+    # Connect to the database (modify your database path as necessary)
+    conn = sqlite3.connect('path/to/your_database.db')
+    cursor = conn.cursor()
+    
+    # Step 1: Retrieve all appointments for the specific doctor
+    query = """
+    SELECT date_of_appointment, time_of_appointment 
+    FROM dasapp_appointment 
+    WHERE doctor_id_id = ?
+    """
+    cursor.execute(query, (doctor_id,))
+    existing_appointments = cursor.fetchall()
+
+    # Step 2: Compare dates and times
+    for appointment_date, appointment_time in existing_appointments:
+        if appointment_date == user_requested_date and appointment_time == user_requested_time:
+            # Step 3: Slot conflict found
+            print("Warning: The selected date and time is already booked.")
+            conn.close()
+            return False
+
+    # Step 4: No conflicts, proceed to book the appointment
+    insert_query = """
+    INSERT INTO dasapp_appointment (doctor_id_id, date_of_appointment, time_of_appointment)
+    VALUES (?, ?, ?)
+    """
+    cursor.execute(insert_query, (doctor_id, user_requested_date, user_requested_time))
+    conn.commit()
+    conn.close()
+    
+    print("Appointment successfully scheduled.")
+    return True
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def create_appointment(request):
+    doctorview = DoctorReg.objects.all()
+    page = Page.objects.all()
+
+    if request.method == "POST":
+        # Collect form data
+        fullname = request.POST.get("fullname")
+        email = request.POST.get("email")
+        mobilenumber = request.POST.get("mobilenumber")
+        address = request.POST.get("address")
+        age = request.POST.get("age")
+        gender = request.POST.get("gender")
+        appointmenttype = request.POST.get("appointmenttype")
+        date_of_appointment = request.POST.get("date_of_appointment")
+        time_of_appointment = request.POST.get("time_of_appointment")
+        doctor_id = request.POST.get("doctor_id")
+        additional_msg = request.POST.get("additional_msg")
+
+        # Call the schedule_appointment function
+        if not schedule_appointment(doctor_id, date_of_appointment, time_of_appointment):
+            messages.warning(request, "The selected date and time is already booked.")
+            # Render the appointment form with existing data
+            context = {
+                "doctorview": doctorview,
+                "page": page,
+                "fullname": fullname,
+                "email": email,
+                "mobilenumber": mobilenumber,
+                "address": address,
+                "age": age,
+                "gender": gender,
+                "appointmenttype": appointmenttype,
+                "date_of_appointment": date_of_appointment,
+                "time_of_appointment": time_of_appointment,
+                "doctor_id": doctor_id,
+                "additional_msg": additional_msg,
+            }
+            return render(request, "appointment.html", context)
+
+        # If the appointment is successfully scheduled
+        messages.success(request, "Your Appointment Request Has Been Sent. We Will Contact You Soon")
+        return redirect("appointment")
+
+    context = {"doctorview": doctorview, "page": page}
+    return render(request, "appointment.html", context)

@@ -163,35 +163,41 @@ def UPDATE_DOCTOR(request, id):
     return render(request, "admin/update_doctor.html", context)
 
 
+
 @login_required(login_url="/")
 def UPDATE_DOCTOR_DETAILS(request, sep_id):
     # Retrieve the doctor record from the database
-    DoctorReg = get_object_or_404(DoctorReg, id=sep_id)
+    doctor = get_object_or_404(DoctorReg, id=sep_id)
+
+    # Store the current specialization to retain it during update
+    current_specialization_id = doctor.specialization_id
 
     # Check if the form is submitted
     if request.method == "POST":
         # Get updated data from the form
-        profile_pic=request.FILES.get("profile_pic"),
-        username = request.POST.get("username"),
-        first_name = request.POST.get("first_name"),
-        last_name = request.POST.get("last_name"),
-        email = request.POST.get("email"),
-        password = request.POST.get("password"),
+        profile_pic = request.FILES.get("profile_pic")  # Note: No comma at the end
+        username = request.POST.get("username")
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
         mobilenumber = request.POST.get("mobilenumber")
-        specialization_id = request.POST.get("specialization_id")
 
         # Update the doctor's details
-        DoctorReg.username = username,
-        DoctorReg.first_name = first_name,
-        DoctorReg.last_name = last_name,
-        DoctorReg.email = email,
-        DoctorReg.profile_pic=profile_pic,
-        DoctorReg.password = password,
-        DoctorReg.mobilenumber = mobilenumber,
-        DoctorReg.specialization_id = specialization_id,
+        doctor.username = username
+        doctor.first_name = first_name
+        doctor.last_name = last_name
+        doctor.email = email
+        if profile_pic:  # Only update if a new profile picture is uploaded
+            doctor.profile_pic = profile_pic
+        doctor.password = password  # Consider hashing this before saving!
+        doctor.mobilenumber = mobilenumber
+        
+        # Retain existing specialization while saving
+        doctor.specialization_id = current_specialization_id
         
         # Save the updates to the database
-        DoctorReg.save()
+        doctor.save()
         
         # Show a success message
         messages.success(request, "Doctor details updated successfully")
@@ -199,13 +205,13 @@ def UPDATE_DOCTOR_DETAILS(request, sep_id):
         # Redirect to the manage doctors page
         return redirect("doctor_list")
     
-    # Load specializations for the form dropdown
+    # Load specializations for the form dropdown (if needed for other purposes)
     specializations = Specialization.objects.all()
 
     # Render the form with the current doctor data
     return render(request, "admin/update_doctor.html", {
-        "doctor": DoctorReg,
-        "specializations": specializations
+        "doctor": doctor,
+        "specializations": specializations  # This can be removed if not used in form
     })
 
 # #end doctor
