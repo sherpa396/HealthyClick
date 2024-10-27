@@ -243,13 +243,14 @@ def User_Search_Appointments(request):
 
 
 
-def View_Appointment_Details(request,id):
+def View_Appointment_Details(request, id):
     page = Page.objects.all()
-    patientdetails=Appointment.objects.filter(id=id)
-    context={'patientdetails':patientdetails,
-    'page': page,
-    'id': id,
-
+    specialization = Specialization.objects.all()
+    patientdetails = Appointment.objects.filter(id=id).select_related('doctor_id')  # Use select_related for optimization
+    context = {
+        'patientdetails': patientdetails,
+        'page': page,
+        'id': id,
     }
 
-    return render(request,'user_appointment-details.html',context)
+    return render(request, 'user_appointment-details.html', context)

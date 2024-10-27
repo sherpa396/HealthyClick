@@ -125,20 +125,26 @@ def render_to_pdf(template_src, context_dict={}):
 	return None
 
 #Opens up page as PDF
-class ViewPDF(View):
-	def get(self, request, *args, **kwargs):
-            return render(request, 'pdf_template.html', {'xyz': data})
-
 def invoice_view(request, id):
-    # Fetch patient details based on the provided patient_id
+    # Fetch patient details based on the provided appointment ID
     patient_details = Appointment.objects.get(id=id)
+    
+    # Get the associated doctor details
+    doctor_details = patient_details.doctor_id  # Get DoctorReg instance
+    doctor_full_name = f"{doctor_details.admin.first_name} {doctor_details.admin.last_name}" if doctor_details.admin else "N/A"
+    doctor_phone_number = doctor_details.mobilenumber
+    
     context = {
         'appnumber': patient_details.appointmentnumber,
         'appointmentdate': patient_details.date_of_appointment,
         'doctor_remarks': patient_details.remark,
         'prescribed_medicine': patient_details.prescription,
         'recommended_test': patient_details.recommendedtest,
-        'doctor_name': patient_details.fullname,
+        'doctor_name': doctor_full_name,  # Full name of the doctor
+        'doctor_phone': doctor_phone_number,  # Phone number of the doctor
+        'fullname': patient_details.fullname,  # Full name of the doctor
+        
+        
 
         "website": "www.HealthyClick.pythonanywhere.com",
         "address": "Bouddha - 06, Kathmandu, Nepal",
@@ -147,6 +153,7 @@ def invoice_view(request, id):
     }
     
     return render(request, 'pdf_template.html', {'context': context})
+
 
 
 def index(request):

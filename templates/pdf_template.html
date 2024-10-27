@@ -15,7 +15,7 @@
         .main-container {
             max-width: 900px;
             margin: 0 auto;
-			height: 700px;
+			height: 800px;
             background-color: #ffffff;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             border-radius: 20px;
@@ -91,16 +91,19 @@
         </div>
         <hr>
             <center><h1>Prescription & Invoice</h1></center>
-        <hr>
-        <div class="bill">
-            <p>Bill No. : {{context.appnumber}}</p>
-            <p>Date : {{context.appointmentdate}}</p>
-            <p>Doctor Remarks : {{context.doctor_remarks}}</p>
-            <p>Prescribed Medicine : {{context.prescribed_medicine}}</p>
-            <p>Recommended Test : {{context.recommended_test}}</p>
-            <p>Total Doctor Fee : Nrs.200</p>
-            {% comment %} <p>Doctor's Name:{{context.doctor_name}}</p> {% endcomment %}
-        </div>
+            <hr>
+            <div class="bill">
+                <p>Bill No. : {{ context.appnumber }}</p>
+                <p>Date : {{ context.appointmentdate }}</p>
+                <p>Patient's Name : {{ context.fullname }}</p>
+                <p>Doctor's Name: {{ context.doctor_name }}</p>
+                <p>Doctor's Phone: {{ context.doctor_phone }}</p>
+                <p>Doctor Remarks : {{ context.doctor_remarks }}</p>
+                <p>Prescribed Medicine : {{ context.prescribed_medicine }}</p>
+                <p>Recommended Test : {{ context.recommended_test }}</p>
+                <p>Total Doctor Fee : Nrs.200</p>
+            </div>
+            
         <hr>
         <div><center>***Medicine cures diseases, but only doctors can cure patients***</center></div>
     </div>

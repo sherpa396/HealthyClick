@@ -1805,19 +1805,23 @@ footer p {
 .login-body {
     display: table;
     height: 100vh;
-    min-height: 100vh;
+    width: 100%
 }
 .login-wrapper {
 	width: 100%;
 	height: 100%;
 	display: table-cell;
+	display: table-cell;
+    text-align: left; /* Center content horizontally */
 	vertical-align: middle;
 }
 .login-wrapper .loginbox {
     background-color: #fff;
     border-radius: 6px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(238, 4, 4, 0.1);
 	display: flex;
+	flex-direction: row;
+	justify-content: center;
     margin: 1.875rem auto;
     max-width: 100%;
     min-height: 500px;
@@ -1825,7 +1829,7 @@ footer p {
 }
 .login-wrapper .loginbox .login-left {
     align-items: center;
-    background: #e6eaed;
+    background: #50a5e5;
     background-image: url(../img/login.jpg);
     border-radius: 6px 0 0 6px;
     flex-direction: column;

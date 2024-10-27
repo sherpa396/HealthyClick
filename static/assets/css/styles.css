@@ -1,0 +1,56 @@
+/* General Body Styles */
+body {
+    font-family: 'Poppins', sans-serif; /* Use the specified font */
+    background-color: #f8f9fa; /* Light background color for contrast */
+    margin: 0;
+    padding: 0;
+}
+
+/* Main Wrapper */
+.main-wrapper {
+    display: flex;
+    align-items: center; /* Vertically center the content */
+    justify-content: center; /* Horizontally center the content */
+    height: 100vh; /* Full viewport height */
+}
+
+/* Login Box */
+.loginbox {
+    background-color: #ffffff; /* White background for the form */
+    padding: 30px; /* Add padding for spacing */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    width: 100%; /* Full width */
+    max-width: 800px; /* Maximum width */
+}
+
+/* Form Group Styles */
+.form-group {
+    margin-bottom: 1rem; /* Spacing between fields */
+}
+
+/* Two Column Layout */
+.two-column {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem; /* Space between columns */
+}
+
+/* Column Flex */
+.two-column .form-group {
+    flex: 1; /* Allow equal width */
+    min-width: 250px; /* Minimum width for each column */
+}
+
+/* Button Styles */
+.btn {
+    padding: 10px 20px; /* Add padding for buttons */
+    border-radius: 5px; /* Rounded corners for buttons */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .two-column {
+        flex-direction: column; /* Stack columns vertically on smaller screens */
+    }
+}

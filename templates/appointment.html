@@ -136,12 +136,22 @@
                             </div>
 
                             <div class="col-12 col-sm-6">
-                                <div class="time" id="time" data-target-input="nearest"></div>
-                                    <input type="time" class="form-control border-0" placeholder="Choose Time" data-target="#time"
-                                    data-toggle="datetimepicker" style="height: 55px;" name="time_of_appointment" required="true">
-                                </div>
+                                <select name="time_of_appointment" class="form-select border-0" style="height: 55px;" required>
+                                    <option value="" disabled selected>Select Time</option>
+                                    <option value="10:00 AM">10:00 AM</option>
+                                    <option value="10:30 AM">10:30 AM</option>
+                                    <option value="11:00 AM">11:00 AM</option>
+                                    <option value="11:30 AM">11:30 AM</option>
+                                    <option value="12:00 PM">12:00 PM</option>
+                                    <option value="12:30 PM">12:30 PM</option>
+                                    <option value="01:00 PM">01:00 PM</option>
+                                    <option value="01:30 PM">01:30 PM</option>
+                                    <option value="02:00 PM">02:00 PM</option>
+                                    <option value="02:30 PM">02:30 PM</option>
+                                    <option value="03:00 PM">03:00 PM</option>
+                                    <option value="03:30 PM">03:30 PM</option>
+                                </select>
                             </div>
-                            
 
                             
                             <div class="col-12" style="padding-top: 20px;">

@@ -50,7 +50,11 @@
             <div class="table-responsive card p-5">
                 {% for i in patientdetails %}
                 <h2><center>Patient's Details</center></h2>
-                <br>Appointment Number: {{i.appointmentnumber}}  <br>Date: {{i.date_of_appointment}}
+                <br>Appointment Number: {{i.appointmentnumber}}<br>
+                    Date: {{i.date_of_appointment}}<br>
+                    Doctor's Name: {{ i.doctor_id.admin.first_name }} {{ i.doctor_id.admin.last_name }}<br>
+                    Doctor's Specialization: {{ i.doctor_id.specialization_id.sname }}<br>
+
                 <br>
                 <br>
                 <table class="table table-hover table-center mb-0 datatable">
